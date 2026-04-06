@@ -1,0 +1,2909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Risk to Return: Why Generic Payroll Is Costing Care Providers More Than They Think</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+  :root {
+    /* ── EH brand ── */
+    --purple:#A569FF;--purple-l:#C4A4FF;--purple-d:#2D0649;--purple-m:#5B21B6;
+    --eh-neon:#BAFC58;
+    /* ── SC brand ── */
+    --sc-navy:#242F65;--sc-periwinkle:#D5DFF5;--sc-blue:#5175D1;--sc-coral:#F25056;
+    /* ── Shared neutrals ── */
+    --teal:#5175D1;--teal-l:#8DA5E8;
+    --green:#059669;--green-l:#34D399;
+    --red:#DC2626;--red-l:#FCA5A5;
+    --gold:#D97706;--gold-l:#FCD34D;
+    --navy:#242F65;
+    --bg:#F5F5F7;--surface:#FFFFFF;--s2:#EEF1FA;--s3:#D5DFF5;
+    --border:rgba(36,47,101,0.12);--border-soft:rgba(0,0,0,0.07);
+    --text:#1C1C1E;--muted:rgba(28,28,30,0.5);
+    --shadow:0 2px 24px rgba(36,47,101,0.08);
+    --shadow-lg:0 8px 40px rgba(36,47,101,0.14);
+    --r:16px;--r-sm:10px;
+  }
+  .dark {
+    --purple:#A569FF;--purple-l:#C4A4FF;--purple-d:#1A0430;--purple-m:#5B21B6;
+    --eh-neon:#BAFC58;
+    --sc-navy:#1A2250;--sc-periwinkle:#2D3B7A;--sc-blue:#5175D1;--sc-coral:#F25056;
+    --teal:#5175D1;--teal-l:#8DA5E8;
+    --green:#34D399;--green-l:#6EE7B7;
+    --red:#F87171;--red-l:#FECACA;
+    --gold:#FCD34D;--gold-l:#FDE68A;
+    --bg:#0E1020;--surface:#161B35;--s2:#1C2340;--s3:#242F65;
+    --border:rgba(165,105,255,0.15);--border-soft:rgba(255,255,255,0.07);
+    --text:#F0F2FF;--muted:rgba(240,242,255,0.45);
+    --shadow:0 2px 24px rgba(0,0,0,0.4);
+    --shadow-lg:0 8px 40px rgba(0,0,0,0.5);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  /* ── Hidden UI elements ── */
+  .theme-toggle, .tab-bar, .progress-bar { display: none !important; }
+
+  body {
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    transition:background 0.3s,color 0.3s;
+  }
+
+  /* Subtle noise texture */
+  body::after {
+    content:'';
+    position:fixed;inset:0;pointer-events:none;z-index:1000;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity:0.4;
+  }
+
+  /* PROGRESS */
+  .progress-bar{height:3px;background:var(--s3);flex-shrink:0;position:relative;z-index:10;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--sc-blue));transition:width 0.35s cubic-bezier(0.4,0,0.2,1);border-radius:2px;}
+
+  /* TAB BAR */
+  .tab-bar {
+    position:relative;z-index:10;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:stretch;
+    overflow-x:auto;scrollbar-width:none;
+    flex-shrink:0;height:50px;
+    box-shadow:0 1px 0 var(--border),0 4px 20px rgba(36,47,101,0.04);
+  }
+  .tab-bar::-webkit-scrollbar{display:none;}
+  .tab-logo{display:flex;align-items:center;padding:0 16px;border-right:1px solid var(--border);flex-shrink:0;gap:0;}
+  .tab-logo svg{height:20px;width:auto;}
+  /* Co-brand separator */
+  .tab-logo-sep{font-size:11px;font-weight:400;color:#999;padding:0 8px;flex-shrink:0;line-height:1;}
+  /* ShiftCare wordmark text */
+  .tab-logo-sc{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;color:var(--sc-navy);letter-spacing:-0.02em;flex-shrink:0;}
+  .dark .tab-logo-sc{color:#FFFFFF;}
+  .tab {
+    padding:0 14px;height:50px;
+    display:flex;align-items:center;gap:6px;
+    font-size:10.5px;font-weight:600;
+    color:var(--muted);cursor:pointer;
+    border-bottom:2px solid transparent;
+    white-space:nowrap;
+    transition:all 0.18s;flex-shrink:0;
+    user-select:none;border-top:2px solid transparent;
+    letter-spacing:0.02em;
+  }
+  .tab:hover{color:var(--text);}
+  .tab.active{color:var(--purple);border-bottom-color:var(--purple);}
+  .tab-num{
+    width:17px;height:17px;border-radius:50%;
+    background:var(--s3);font-size:9px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;transition:all 0.18s;
+  }
+  .tab.active .tab-num{background:var(--purple);color:#fff;}
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    position:fixed;top:0;right:0;z-index:200;
+    display:flex;align-items:center;gap:7px;
+    background:var(--surface);border:none;
+    border-left:1px solid var(--border);
+    height:50px;padding:0 16px;cursor:pointer;
+    font-size:11px;font-weight:600;color:var(--muted);
+    transition:all 0.2s;font-family:'DM Sans',sans-serif;
+    user-select:none;
+  }
+  .theme-toggle:hover{color:var(--text);}
+  .toggle-track{width:30px;height:17px;background:var(--s3);border-radius:100px;position:relative;transition:background 0.3s;flex-shrink:0;}
+  .toggle-track.on{background:var(--purple);}
+  .toggle-thumb{position:absolute;top:2.5px;left:2.5px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform 0.25s cubic-bezier(0.4,0,0.2,1);box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+  .toggle-track.on .toggle-thumb{transform:translateX(13px);}
+
+  /* SLIDES */
+  .slides-wrap{flex:1;overflow:hidden;position:relative;z-index:1;}
+  .slide{display:none;height:100%;padding:16px 32px;overflow:hidden;}
+  .slide.active{display:flex;flex-direction:column;}
+
+  /* NAV */
+  .nav-arrows{position:fixed;bottom:22px;right:26px;display:flex;gap:8px;z-index:50;}
+  .nav-btn {
+    width:36px;height:36px;border-radius:50%;
+    background:var(--surface);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:15px;color:var(--muted);
+    box-shadow:var(--shadow);transition:all 0.15s;
+  }
+  .nav-btn:hover{color:var(--purple);border-color:var(--purple);transform:scale(1.05);}
+  .nav-btn:disabled{opacity:0.3;cursor:default;transform:none;}
+
+  /* ──────────────────────────────
+     SHARED TYPOGRAPHY & COMPONENTS
+  ────────────────────────────── */
+  .eyebrow {
+    font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--purple);margin-bottom:5px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:'';width:22px;height:2px;background:linear-gradient(90deg,var(--purple),var(--sc-blue));border-radius:2px;}
+
+  .h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,2.8vw,36px);font-weight:800;line-height:1.1;margin-bottom:6px;}
+  .h1 span{color:var(--purple);}
+  .h1 em{font-style:normal;color:var(--green);}
+
+  .sub{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.55;}
+
+  /* CARDS */
+  .card {
+    background:var(--surface);
+    border:1px solid var(--border-soft);
+    border-radius:var(--r);
+    padding:16px 18px;
+    box-shadow:var(--shadow);
+    transition:background 0.3s,border-color 0.2s;
+  }
+  .card-accent{border-top:3px solid var(--purple);}
+  .card-red{border-top:3px solid var(--red);}
+  .card-teal{border-top:3px solid var(--teal);}
+  .card-green{border-top:3px solid var(--green);}
+  .card-gold{border-top:3px solid var(--gold);}
+
+  /* news link chip */
+  .news-chip {
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:9.5px;font-weight:600;letter-spacing:0.04em;
+    padding:3px 9px;border-radius:100px;
+    background:rgba(165,105,255,0.08);color:var(--purple);
+    border:1px solid rgba(165,105,255,0.2);
+    text-decoration:none;transition:all 0.15s;
+    margin-top:6px;white-space:nowrap;
+  }
+  .news-chip:hover{background:rgba(165,105,255,0.15);border-color:var(--purple);}
+  .news-chip.red{background:rgba(220,38,38,0.08);color:var(--red);border-color:rgba(220,38,38,0.2);}
+  .news-chip.red:hover{background:rgba(220,38,38,0.15);}
+  .news-chip.gold{background:rgba(217,119,6,0.08);color:var(--gold);border-color:rgba(217,119,6,0.2);}
+  .news-chip.gold:hover{background:rgba(217,119,6,0.15);}
+  .news-chip::before{content:'📰';font-size:9px;}
+
+  /* GRIDS */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+
+  /* STAT BLOCK */
+  .stat{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(26px,3.2vw,44px);font-weight:800;line-height:1;}
+  .sl{font-size:10.5px;color:var(--muted);font-weight:500;margin-top:3px;line-height:1.4;}
+
+  /* TAGS */
+  .tag{font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 8px;border-radius:5px;margin-bottom:6px;display:inline-block;}
+  .tp{background:rgba(165,105,255,0.1);color:var(--purple);}
+  .tr{background:rgba(220,38,38,0.1);color:var(--red);}
+  .tg{background:rgba(5,150,105,0.1);color:var(--green);}
+  .tt{background:rgba(81,117,209,0.1);color:var(--teal);}
+  .tgold{background:rgba(217,119,6,0.1);color:var(--gold);}
+
+  /* BODY TEXT */
+  .body{font-size:12px;line-height:1.6;color:var(--muted);}
+  .body strong{color:var(--text);font-weight:600;}
+
+  /* ICON CONTAINERS */
+  .ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .icp{background:rgba(165,105,255,0.1);}
+  .icr{background:rgba(220,38,38,0.1);}
+  .ict{background:rgba(81,117,209,0.1);}
+  .icg{background:rgba(5,150,105,0.1);}
+  .icgold{background:rgba(217,119,6,0.1);}
+
+  .row{display:flex;align-items:flex-start;gap:10px;}
+  .div{height:1px;background:var(--border-soft);margin:10px 0;}
+
+  .ci{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);padding:4px 0;line-height:1.4;}
+  .ci-i{flex-shrink:0;margin-top:1px;font-size:12px;}
+
+  .sli{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid var(--border-soft);font-size:11.5px;color:var(--muted);line-height:1.4;}
+  .sli:last-child{border-bottom:none;}
+  .sli::before{content:'–';color:var(--border-soft);flex-shrink:0;font-weight:700;}
+
+  /* ──── SLIDE 1 TITLE ──── */
+  #s1 {
+    background:var(--purple-d);
+    color:white;
+    justify-content:center;align-items:center;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  #s1::before {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 35%,rgba(165,105,255,0.25) 0%,transparent 70%),
+      radial-gradient(ellipse 40% 35% at 85% 80%,rgba(81,117,209,0.15) 0%,transparent 60%),
+      radial-gradient(ellipse 30% 25% at 10% 80%,rgba(36,47,101,0.2) 0%,transparent 50%);
+  }
+  /* Decorative grid lines */
+  #s1::after {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);
+    background-size:60px 60px;
+  }
+  #s1 .c{position:relative;z-index:2;max-width:720px;}
+  #s1 .et{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(255,255,255,0.6);margin-bottom:18px;
+  }
+  #s1 .et::before{
+    content:'';width:22px;height:2px;
+    background:linear-gradient(90deg,rgba(255,255,255,0.7),rgba(255,255,255,0.3));
+    border-radius:2px;flex-shrink:0;
+  }
+  #s1 h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;line-height:1.08;margin-bottom:16px;color:white;}
+  #s1 h1 span{color:var(--eh-neon);}
+  #s1 .st{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:32px;line-height:1.6;}
+  #s1 .badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+  #s1 .badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.65);}
+  #s1 .badge strong{color:white;font-weight:700;}
+  #s1 .ft{font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:0.05em;border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;}
+
+  /* ──── SLIDE 2 AGENDA ──── */
+  .ag-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;flex:1;}
+  .ag-card {
+    background:var(--surface);border:1px solid var(--border-soft);
+    border-radius:var(--r);padding:16px;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;
+  }
+  .ag-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+  .a1::before{background:linear-gradient(90deg,var(--purple),var(--purple-l));}
+  .a2::before{background:linear-gradient(90deg,var(--sc-blue),var(--sc-periwinkle));}
+  .a3::before{background:linear-gradient(90deg,var(--red),#FB7185);}
+  .a4::before{background:linear-gradient(90deg,var(--gold),var(--gold-l));}
+  .a5::before{background:linear-gradient(90deg,var(--green),var(--green-l));}
+  .ag-n{font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;opacity:0.06;line-height:1;margin-bottom:3px;}
+  .ag-t{font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;margin-bottom:6px;}
+  .ag-d{font-size:11px;color:var(--muted);line-height:1.5;flex:1;}
+  .ag-bonus {
+    margin-top:12px;
+    background:linear-gradient(135deg,rgba(165,105,255,0.06),rgba(81,117,209,0.04));
+    border:1px solid rgba(165,105,255,0.15);
+    border-radius:10px;padding:11px 16px;
+    font-size:12px;color:var(--text);text-align:center;font-weight:500;
+  }
+
+  /* ──── SLIDE 3 LANDSCAPE ──── */
+  .landscape-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;flex:1;}
+  .landscape-card{
+    background:var(--surface);border:1px solid var(--border-soft);
+    border-radius:var(--r);padding:26px 24px;
+    display:flex;flex-direction:column;
+    box-shadow:var(--shadow);
+    transition:transform 0.2s,box-shadow 0.2s;
+  }
+  .landscape-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+  .lc-icon{font-size:36px;margin-bottom:16px;}
+  .lc-title{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;}
+  .lc-body{font-size:14.5px;line-height:1.7;color:var(--muted);flex:1;}
+  .lc-badge{margin-top:16px;padding:10px 14px;border-radius:8px;font-size:12.5px;font-weight:600;}
+  .lc-red{background:rgba(220,38,38,0.07);color:var(--red);}
+  .lc-gold{background:rgba(217,119,6,0.07);color:var(--gold);}
+  .lc-purple{background:rgba(165,105,255,0.07);color:var(--purple);}
+
+  /* ──── SLIDE 5 VS ──── */
+  .vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;flex:1;}
+  .vs-div{display:flex;flex-direction:column;align-items:center;gap:5px;}
+  .vs-c{width:38px;height:38px;border-radius:50%;background:var(--s3);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--muted);}
+  .vs-l{width:1px;height:50px;background:var(--border-soft);}
+
+  /* ──── SLIDE 6 ROI ──── */
+  input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:5px;outline:none;cursor:pointer;background:var(--s3);}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--purple);box-shadow:0 0 10px rgba(165,105,255,0.4);cursor:pointer;border:2px solid var(--surface);transition:transform 0.1s;}
+  input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25);}
+  .iv{font-size:11.5px;font-weight:700;color:var(--text);background:var(--s2);padding:2px 10px;border-radius:6px;}
+
+  /* ──── SLIDE 11 FLOW ──── */
+  .flow{display:flex;gap:0;align-items:stretch;flex:1;}
+  .fs{flex:1;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:18px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .fa{display:flex;align-items:center;padding:0 7px;color:var(--border-soft);font-size:20px;flex-shrink:0;}
+  .fn{font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;opacity:0.06;line-height:1;margin-bottom:5px;}
+  .ft2{font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;margin-bottom:7px;}
+  .fb{font-size:11.5px;color:var(--muted);line-height:1.55;flex:1;}
+
+  /* ──── SLIDE 16 CTA ──── */
+  #s16 {
+    background:var(--purple-d);
+    color:white;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;
+  }
+  #s16::before {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 65% 55% at 50% 50%,rgba(165,105,255,0.22) 0%,transparent 70%),
+      radial-gradient(ellipse 35% 30% at 15% 80%,rgba(81,117,209,0.15) 0%,transparent 50%);
+  }
+  #s16::after {
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+    background-size:60px 60px;
+  }
+  #s16 .c{position:relative;z-index:2;max-width:680px;}
+  #s16 h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(24px,3.5vw,42px);font-weight:800;margin-bottom:12px;color:white;line-height:1.1;}
+  #s16 .cs{font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:28px;line-height:1.65;}
+  .dlvr{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px;}
+  .dlv {
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;padding:16px;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    font-size:12px;color:rgba(255,255,255,0.7);line-height:1.4;
+  }
+  .dlv-i{font-size:22px;}
+  .cta {
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--eh-neon);
+    color:#1C1C1E;border-radius:100px;
+    padding:12px 30px;font-size:13px;font-weight:700;
+    cursor:pointer;border:none;
+    font-family:'DM Sans',sans-serif;
+    box-shadow:0 4px 24px rgba(186,252,88,0.35);
+    transition:all 0.2s;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(186,252,88,0.45);}
+
+  /* TABLE */
+  .ct{width:100%;border-collapse:collapse;}
+  .ct th{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:8px 14px;border-bottom:1px solid var(--border-soft);text-align:left;}
+  .ct th:not(:first-child){text-align:center;}
+  .ct td{padding:9px 14px;font-size:12.5px;border-bottom:1px solid var(--border-soft);vertical-align:middle;}
+  .ct tr:last-child td{border-bottom:none;}
+  .ct td:not(:first-child){text-align:center;font-weight:600;}
+  .ct td:first-child{color:var(--muted);}
+  .bad{color:var(--red)!important;}
+  .good{color:var(--green)!important;}
+  .neu{color:var(--muted)!important;}
+
+  /* Q&A */
+  .qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1;}
+  .qa{background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);display:flex;gap:10px;}
+  .qq{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:var(--purple);flex-shrink:0;opacity:0.25;}
+  .qn{font-size:12px;font-weight:700;margin-bottom:4px;}
+  .qa-a{font-size:11.5px;color:var(--muted);line-height:1.5;}
+
+  /* CASE STUDY BLOCK */
+  .case-block {
+    background:linear-gradient(135deg,rgba(220,38,38,0.04),rgba(217,119,6,0.03));
+    border:1px solid rgba(220,38,38,0.15);
+    border-radius:12px;padding:12px 14px;
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .case-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+  .case-title{font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;}
+  .case-body{font-size:11px;color:var(--muted);line-height:1.5;}
+
+  /* HIGHLIGHT BANNER */
+  .highlight-banner {
+    background:linear-gradient(135deg,rgba(165,105,255,0.08),rgba(81,117,209,0.05));
+    border:1px solid rgba(165,105,255,0.2);
+    border-radius:12px;padding:12px 16px;
+    font-size:13px;font-weight:600;
+    color:var(--text);text-align:center;
+  }
+  .highlight-banner span{color:var(--purple);}
+
+  /* PENALTY CALLOUT */
+  .penalty-box{
+    background:rgba(220,38,38,0.06);
+    border:1px solid rgba(220,38,38,0.2);
+    border-radius:10px;padding:10px 14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .penalty-num{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--red);flex-shrink:0;}
+  .penalty-label{font-size:11px;color:var(--muted);line-height:1.4;}
+  .penalty-label strong{color:var(--text);}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">
+  <span id="tLabel">🌙</span>
+  <div class="toggle-track" id="tTrack"><div class="toggle-thumb"></div></div>
+</button>
+
+<div class="progress-bar"><div class="progress-fill" id="pFill" style="width:6.25%"></div></div>
+
+<div class="tab-bar" id="tabBar">
+  <div class="tab-logo">
+    <!-- Employment Hero logo -->
+    <svg viewBox="25 220 450 60" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#A569FF" d="M108.11,259.66c3.71,0,6.15-1.79,7.42-3.79.16-.25.51-.28.7-.06l3.03,3.34c.15.16.16.42.02.58-2.19,2.58-5.95,4.66-11.36,4.66-8.24,0-12.44-5.48-12.44-12.58s4.72-12.68,12.4-12.68,11.33,4.8,11.28,13.64c0,.24-.2.44-.45.44h-16.96c-.28,0-.49.25-.44.53.67,3.91,3.35,5.93,6.8,5.93ZM101.94,249.36h10.94c.28,0,.48-.25.44-.52-.51-3.22-2.52-5-5.45-5-2.75,0-5.41,1.59-6.36,4.95-.08.28.13.57.43.57ZM215.81,264.38c-6.92,0-12.77-4.45-12.77-12.63s5.85-12.63,12.77-12.63,12.77,4.54,12.77,12.63-5.8,12.63-12.77,12.63ZM208.89,251.75c0,5.34,3.23,7.86,6.92,7.86s6.93-2.53,6.93-7.81-3.23-7.81-6.93-7.81-6.92,2.57-6.92,7.81Z"/>
+      <path fill="#A569FF" d="M70.11,257.33c.8,0,1.55.44,1.95,1.15.38.68.37,1.49-.03,2.16l-.02.03c-2.79,4.44-7.28,7.67-12.34,8.88-1.38.33-2.35,1.58-2.35,3.05,0,1.69,1.36,3.07,3.04,3.07.24,0,.47-.03.71-.08,5.65-1.35,10.78-4.6,14.43-9.17,3.77-4.7,5.76-10.37,5.76-16.4s-1.99-11.7-5.76-16.4c-3.65-4.58-8.78-7.84-14.43-9.18-.23-.06-.47-.08-.71-.08-1.67,0-3.04,1.37-3.04,3.07,0,1.46.96,2.71,2.35,3.05,5.05,1.21,9.55,4.44,12.33,8.86l.03.06c.4.66.41,1.47.03,2.15-.4.71-1.15,1.15-1.95,1.15-.33,0-.64-.07-.95-.21-1.1-.52-2.29-.78-3.52-.78-4.4,0-8.04,3.44-8.29,7.83v.05c-.01.13-.02.23-.02.33v.2c0,.1,0,.21.02.33v.05c.25,4.39,3.9,7.84,8.29,7.84,1.23,0,2.42-.27,3.52-.78.3-.14.62-.21.95-.21"/>
+      <path fill="#A569FF" d="M49.88,224.36c-.24,0-.47.03-.71.08-5.65,1.34-10.78,4.6-14.43,9.17-3.77,4.71-5.76,10.37-5.76,16.4s1.99,11.7,5.76,16.4c3.66,4.57,8.78,7.83,14.43,9.17.24.06.47.08.71.08,1.67,0,3.04-1.37,3.04-3.07,0-1.46-.96-2.71-2.35-3.05-5.05-1.21-9.55-4.44-12.33-8.87l-.03-.05c-.41-.68-.42-1.48-.03-2.16.4-.71,1.15-1.15,1.95-1.15.33,0,.64.07.95.21,1.1.52,2.29.78,3.52.78,4.4,0,8.04-3.44,8.29-7.83v-.05c.01-.12.02-.22.02-.33v-.2c0-.1,0-.21-.02-.33v-.05c-.25-4.39-3.9-7.84-8.29-7.84-1.23,0-2.42.27-3.52.78-.3.14-.62.21-.95.21-.8,0-1.55-.44-1.95-1.15-.38-.68-.37-1.49.03-2.16v-.02l.02-.03c2.78-4.43,7.28-7.66,12.33-8.87,1.38-.33,2.35-1.58,2.35-3.05,0-1.69-1.36-3.07-3.04-3.07"/>
+      <path fill="#A569FF" d="M150.72,234.69c-1.56,0-3.1.18-4.58.52-.25.06-.44.28-.44.54v4.13c0,.29.29.5.57.42,1.4-.38,2.88-.59,4.41-.59,6.54,0,10.12,3.48,10.12,9.71v.73h-7.14c-7.56,0-12.08,3.37-12.08,9.01s4.2,8.51,10.12,8.51c3.46,0,6.78-1.3,9.1-4.02v3.34h6.38v-17.57c0-9.2-5.72-14.73-16.46-14.73ZM149.8,262.32c-3.15,0-5.11-1.39-5.11-3.96s1.85-4.07,6.54-4.07h5.61v2.72c-1.03,3.47-3.85,5.31-7.04,5.31ZM192.32,234.69c-3.98,0-7.42,1.64-9.51,4.56v-3.88h-6.38v28.46h6.69v-14.85c0-5.87,3-8.87,7.66-8.87s7.13,2.64,7.13,8.38v15.34h6.69v-15.99c0-8.89-4.99-13.15-12.28-13.15Z"/>
+    </svg>
+    <!-- Co-brand separator -->
+    <span class="tab-logo-sep">×</span>
+    <!-- ShiftCare wordmark -->
+    <span class="tab-logo-sc">ShiftCare</span>
+  </div>
+  <div class="tab active" data-s="1" onclick="goTo(1)"><div class="tab-num">1</div>Title</div>
+  <div class="tab" data-s="2" onclick="goTo(2)"><div class="tab-num">2</div>Agenda</div>
+  <div class="tab" data-s="3" onclick="goTo(3)"><div class="tab-num">3</div>Three Truths</div>
+  <div class="tab" data-s="4" onclick="goTo(4)"><div class="tab-num">4</div>Landscape</div>
+  <div class="tab" data-s="5" onclick="goTo(5)"><div class="tab-num">5</div>Real Cost</div>
+  <div class="tab" data-s="6" onclick="goTo(6)"><div class="tab-num">6</div>Time</div>
+  <div class="tab" data-s="7" onclick="goTo(7)"><div class="tab-num">7</div>ROI Calc</div>
+  <div class="tab" data-s="8" onclick="goTo(8)"><div class="tab-num">8</div>SCHADS</div>
+  <div class="tab" data-s="9" onclick="goTo(9)"><div class="tab-num">9</div>Errors</div>
+  <div class="tab" data-s="10" onclick="goTo(10)"><div class="tab-num">10</div>Compliance</div>
+  <div class="tab" data-s="11" onclick="goTo(11)"><div class="tab-num">11</div>Profitability</div>
+  <div class="tab" data-s="12" onclick="goTo(12)"><div class="tab-num">12</div>Integration</div>
+  <div class="tab" data-s="13" onclick="goTo(13)"><div class="tab-num">13</div>Accounting</div>
+  <div class="tab" data-s="14" onclick="goTo(14)"><div class="tab-num">14</div>Pricing</div>
+  <div class="tab" data-s="15" onclick="goTo(15)"><div class="tab-num">15</div>Full Picture</div>
+  <div class="tab" data-s="16" onclick="goTo(16)"><div class="tab-num">16</div>Q&amp;A</div>
+  <div class="tab" data-s="17" onclick="goTo(17)"><div class="tab-num">17</div>Next Steps</div>
+</div>
+
+<div class="slides-wrap">
+
+<!-- S1 TITLE -->
+<div class="slide active" id="s1">
+  <div class="c">
+    <div class="et">🏥 NDIS Provider Webinar · 2026</div>
+    <h1>From Risk to Return: <span>Why Generic Payroll Is Costing Care Providers</span> More Than They Think</h1>
+    <div class="st">The five hidden costs of manual payroll — and what providers are doing instead.</div>
+    <div class="badges">
+      <div class="badge">💸 Labour is your <strong>biggest cost</strong></div>
+      <div class="badge">⚖️ Compliance is your <strong>biggest risk</strong></div>
+      <div class="badge">📊 Visibility is your <strong>biggest advantage</strong></div>
+    </div>
+    <div class="ft">Employment Hero × ShiftCare &nbsp;·&nbsp; NDIS Payroll Webinar &nbsp;·&nbsp; $10/emp/month</div>
+  </div>
+</div>
+
+<!-- S2 AGENDA -->
+<div class="slide" id="s2">
+  <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:24px;flex:1;align-items:stretch;min-height:0;">
+
+    <!-- Left: title + promise -->
+    <div style="display:flex;flex-direction:column;justify-content:space-between;gap:12px;">
+      <div class="eyebrow">Today's Agenda</div>
+      <div class="h1">Five hidden costs. <span>One hour.</span> Your numbers.</div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.6;max-width:320px;">We'll put a dollar figure on every cost your current payroll setup is carrying — and show you what's on the other side.</div>
+      <div style="font-size:11px;color:var(--muted);font-style:italic;">Labour · Compliance · Visibility — all three, by the end of this session.</div>
+    </div>
+
+    <!-- Right: vertical agenda list with connecting line -->
+    <div style="position:relative;display:flex;flex-direction:column;justify-content:stretch;gap:0;padding-left:32px;min-height:0;">
+      <!-- Spine line -->
+      <div style="position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--purple),var(--teal),var(--red),var(--gold),var(--green));border-radius:2px;opacity:0.35;"></div>
+
+      <!-- Item 1 -->
+      <div style="display:flex;gap:14px;align-items:stretch;flex:1;padding:5px 0;position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--purple-l));display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <div style="font-size:8px;font-weight:800;color:#fff;">01</div>
+        </div>
+        <div style="flex:1;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13px;">⏱</span>
+            <div style="font-size:12.5px;font-weight:700;">Time Savings</div>
+            <div style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--purple);background:rgba(165,105,255,0.1);padding:1px 7px;border-radius:100px;">Labour Cost</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">From 12–16 hours to 1–2 hours every fortnight. We calculate the dollar difference live.</div>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div style="display:flex;gap:14px;align-items:stretch;flex:1;padding:5px 0;position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--teal),var(--teal-l));display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <div style="font-size:8px;font-weight:800;color:#fff;">02</div>
+        </div>
+        <div style="flex:1;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13px;">📋</span>
+            <div style="font-size:12.5px;font-weight:700;">SCHADS Expertise</div>
+            <div style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--teal);background:rgba(81,117,209,0.1);padding:1px 7px;border-radius:100px;">Key-Person Risk</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">The award changed twice in 2025. Who in your organisation is carrying this — and what happens if they leave?</div>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div style="display:flex;gap:14px;align-items:stretch;flex:1;padding:5px 0;position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--red),#FB7185);display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <div style="font-size:8px;font-weight:800;color:#fff;">03</div>
+        </div>
+        <div style="flex:1;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13px;">⚠️</span>
+            <div style="font-size:12.5px;font-weight:700;">Error Reduction</div>
+            <div style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--red);background:rgba(220,38,38,0.1);padding:1px 7px;border-radius:100px;">Silently Compounds</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">36% of audited providers got penalty rates wrong. We show the back-pay maths — one error × 50 staff × 13 pay runs.</div>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div style="display:flex;gap:14px;align-items:stretch;flex:1;padding:5px 0;position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-l));display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <div style="font-size:8px;font-weight:800;color:#fff;">04</div>
+        </div>
+        <div style="flex:1;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13px;">⚖️</span>
+            <div style="font-size:12.5px;font-weight:700;">Compliance Risk</div>
+            <div style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--gold);background:rgba(217,119,6,0.1);padding:1px 7px;border-radius:100px;">Criminal Since Jan 2025</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">Four-stage FWO escalation ladder. What happened to real providers — and how you stay off it entirely.</div>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div style="display:flex;gap:14px;align-items:stretch;flex:1;padding:5px 0;position:relative;">
+        <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-l));display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;">
+          <div style="font-size:8px;font-weight:800;color:#fff;">05</div>
+        </div>
+        <div style="flex:1;padding:10px 14px;background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <span style="font-size:13px;">📊</span>
+            <div style="font-size:12.5px;font-weight:700;">Profitability Intelligence</div>
+            <div style="margin-left:auto;font-size:9.5px;font-weight:700;color:var(--green);background:rgba(5,150,105,0.1);padding:1px 7px;border-radius:100px;">Competitive Edge</div>
+          </div>
+          <div style="font-size:11px;color:var(--muted);">Know your true cost per client, per shift type, per location. See which participants you're actively subsidising.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S3 THREE TRUTHS -->
+<div class="slide" id="s3">
+  <div class="eyebrow">The Framework</div>
+  <div class="h1">Three truths every <span>NDIS provider</span> needs to own.</div>
+  <div class="sub">Everything we cover today connects back to one of these. By the end, you'll see exactly where ShiftCare and Employment Hero fit.</div>
+
+  <div style="flex:1;display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;gap:14px;align-items:stretch;">
+
+    <!-- TRUTH 1 — spans full left column -->
+    <div style="grid-row:1/3;background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:26px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--red),#FB7185);border-radius:2px 0 0 2px;"></div>
+      <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:16px;">
+        <div style="flex-shrink:0;width:48px;height:48px;border-radius:14px;background:rgba(220,38,38,0.1);display:flex;align-items:center;justify-content:center;font-size:22px;">💸</div>
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:5px;">Biggest Cost</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;line-height:1.15;">Labour is your<br>largest expense.</div>
+        </div>
+      </div>
+      <!-- Big stat -->
+      <div style="padding:14px 18px;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.12);border-radius:12px;margin-bottom:14px;text-align:center;">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:48px;font-weight:800;color:var(--red);line-height:1;">70–80%</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;">of every revenue dollar goes to wages</div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.65;flex:1;">In disability support, that's not a problem to solve — it's the nature of the sector. But how you <em>manage</em> that labour spend is entirely within your control.<br><br>Manual payroll processing, SCHADS errors, and invisible overpayments quietly erode what's left. Most providers are spending <strong style="color:var(--text);">$1,000–2,000/month in admin labour alone</strong> — without ever seeing it on a line item.</div>
+      <div style="margin-top:16px;padding:10px 14px;background:rgba(220,38,38,0.06);border-radius:10px;font-size:11.5px;font-weight:600;color:var(--red);">⏱ EH cuts payroll admin from days to hours</div>
+    </div>
+
+    <!-- TRUTH 2 — top right -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--gold),var(--gold-l));border-radius:2px 0 0 2px;"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="flex-shrink:0;width:38px;height:38px;border-radius:10px;background:rgba(217,119,6,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;">⚖️</div>
+        <div>
+          <div style="font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);">Biggest Risk</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;line-height:1.2;">Compliance is your<br>greatest exposure.</div>
+        </div>
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);line-height:1.6;flex:1;">SCHADS changed <strong style="color:var(--text);">twice in 2025</strong>. Since January 2025, intentional underpayment is a <strong style="color:var(--text);">criminal offence</strong>. The FWO has launched a multi-year sector inquiry. Risk isn't just financial — it's personal director liability.</div>
+      <div style="margin-top:10px;padding:8px 12px;background:rgba(217,119,6,0.06);border-radius:8px;font-size:11px;font-weight:600;color:var(--gold);">⚖️ EH interprets SCHADS automatically — always current</div>
+    </div>
+
+    <!-- TRUTH 3 — bottom right -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;overflow:hidden;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--green),var(--green-l));border-radius:2px 0 0 2px;"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <div style="flex-shrink:0;width:38px;height:38px;border-radius:10px;background:rgba(5,150,105,0.1);display:flex;align-items:center;justify-content:center;font-size:18px;">📊</div>
+        <div>
+          <div style="font-size:9.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--green);">Biggest Advantage</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;line-height:1.2;">Visibility is your<br>competitive edge.</div>
+        </div>
+      </div>
+      <div style="font-size:11.5px;color:var(--muted);line-height:1.6;flex:1;">Most providers know if the business is profitable overall. Very few know which <strong style="color:var(--text);">clients, locations, and shift types</strong> are eroding margin in real time. That visibility is increasingly the difference between providers that survive the NDIS environment — and those that don't.</div>
+      <div style="margin-top:10px;padding:8px 12px;background:rgba(5,150,105,0.06);border-radius:8px;font-size:11px;font-weight:600;color:var(--green);">📊 EH Dimensions gives you full profitability intelligence</div>
+    </div>
+
+  </div>
+
+  <!-- CONNECTOR BANNER -->
+  <div style="margin-top:12px;background:linear-gradient(135deg,rgba(165,105,255,0.07),rgba(81,117,209,0.05));border:1px solid rgba(165,105,255,0.18);border-radius:12px;padding:11px 20px;display:flex;align-items:center;justify-content:center;gap:16px;">
+    <div style="font-size:13px;font-weight:700;color:var(--text);">ShiftCare + Employment Hero is the only combination that addresses all three — together.</div>
+    <div style="font-size:11px;color:var(--muted);white-space:nowrap;">Labour · Risk · Visibility</div>
+  </div>
+</div>
+
+<!-- S4 LANDSCAPE -->
+<div class="slide" id="s4">
+  <div class="eyebrow">Context</div>
+  <div class="h1">The Landscape Has Changed — <span>Dramatically</span></div>
+  <div class="sub">2025 brought three simultaneous shifts that changed the stakes for every NDIS provider in Australia.</div>
+  <div class="landscape-grid">
+    <div class="landscape-card">
+      <div class="lc-icon">⚖️</div>
+      <div class="lc-title">Wage Theft Criminalised</div>
+      <div class="lc-body">From 1 January 2025, <strong>intentional underpayment became a criminal offence</strong> under the Fair Work Act. Penalties reach $7.8M for companies, or <strong>10 years imprisonment</strong> for individuals. Even civil penalties now routinely exceed the original shortfall — in one landmark case, a $650K underpayment attracted <strong>$13.7M in penalties</strong>.</div>
+      <div class="lc-badge lc-red">🚨 Effective 1 January 2025</div>
+    </div>
+    <div class="landscape-card">
+      <div class="lc-icon">🔍</div>
+      <div class="lc-title">FWO Inquiry Launched</div>
+      <div class="lc-body">The Fair Work Ombudsman launched a <strong>formal multi-year inquiry</strong> into the disability support sector in July 2025 — naming it a priority area with "widespread non-compliance." Uniting Communities was hit with an enforceable undertaking to repay <strong>$2.6M to 1,500 employees</strong> after a SCHADS Award audit spanning a decade.</div>
+      <div class="lc-badge lc-gold">📌 Multi-year priority enforcement</div>
+      <a class="news-chip gold" href="https://hallandwilcox.com.au/news/fair-work-ombudsman-pursues-providers-over-alleged-wage-shortfalls/" target="_blank">Hall & Wilcox — FWO Case Update</a>
+      <a class="news-chip gold" href="https://nds.org.au/news/fair-work-ombudsman-launches-inquiry-into-the-disability-support-services-sector" target="_blank">NDS — Sector Inquiry</a>
+    </div>
+    <div class="landscape-card">
+      <div class="lc-icon">📄</div>
+      <div class="lc-title">SCHADS More Complex</div>
+      <div class="lc-body">Pay rates increased <strong>3.5% from July 2025</strong>, then a second wave for aged care workers hit in <strong>October 2025</strong>. New classification structures, ERO loadings, home care stream split, and an ongoing gender undervaluation review mean this award is <strong>changing faster than ever</strong>.</div>
+      <div class="lc-badge lc-purple">🔄 Rate changes twice in 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 REAL COST -->
+<div class="slide" id="s5">
+  <div class="eyebrow">Framework</div>
+  <div class="h1">The Real Cost of Payroll</div>
+  <div class="sub">Most providers see one cost. There are five. We'll put a dollar figure on each today.</div>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:center;">
+
+    <!-- ICEBERG SVG -->
+    <div style="position:relative;height:100%;display:flex;align-items:center;justify-content:center;min-height:0;">
+      <svg viewBox="0 0 340 340" style="width:100%;height:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Water line -->
+        <line x1="10" y1="118" x2="330" y2="118" stroke="rgba(81,117,209,0.25)" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <!-- "Water surface" label -->
+        <text x="16" y="113" fill="rgba(81,117,209,0.6)" font-size="9" font-family="DM Sans,sans-serif" font-weight="600" letter-spacing="1">WATER SURFACE — WHAT PROVIDERS SEE</text>
+        <!-- Tip above water -->
+        <polygon points="170,18 220,118 120,118" fill="rgba(220,38,38,0.18)" stroke="rgba(220,38,38,0.45)" stroke-width="1.5"/>
+        <!-- Visible cost label -->
+        <text x="170" y="72" text-anchor="middle" fill="#DC2626" font-size="11" font-family="DM Sans,sans-serif" font-weight="700">Software</text>
+        <text x="170" y="86" text-anchor="middle" fill="#DC2626" font-size="10" font-family="DM Sans,sans-serif">subscription</text>
+        <!-- Body below water: larger mass -->
+        <polygon points="120,118 220,118 268,200 248,250 210,290 130,290 92,250 72,200" fill="rgba(45,6,73,0.07)" stroke="rgba(165,105,255,0.3)" stroke-width="1.5"/>
+        <!-- Hidden cost items inside the berg -->
+        <text x="170" y="148" text-anchor="middle" fill="rgba(165,105,255,0.9)" font-size="10.5" font-family="DM Sans,sans-serif" font-weight="600">⏱ Admin labour</text>
+        <text x="170" y="168" text-anchor="middle" fill="rgba(165,105,255,0.75)" font-size="10" font-family="DM Sans,sans-serif">~$1,000–2,000/month hidden in salaries</text>
+        <line x1="80" y1="178" x2="260" y2="178" stroke="rgba(165,105,255,0.12)" stroke-width="1"/>
+        <text x="170" y="196" text-anchor="middle" fill="rgba(217,119,6,0.9)" font-size="10.5" font-family="DM Sans,sans-serif" font-weight="600">📋 SCHADS expertise</text>
+        <text x="170" y="212" text-anchor="middle" fill="rgba(217,119,6,0.7)" font-size="10" font-family="DM Sans,sans-serif">Key-person risk &amp; constant award changes</text>
+        <line x1="90" y1="222" x2="250" y2="222" stroke="rgba(165,105,255,0.12)" stroke-width="1"/>
+        <text x="170" y="240" text-anchor="middle" fill="rgba(220,38,38,0.9)" font-size="10.5" font-family="DM Sans,sans-serif" font-weight="600">❌ Errors &amp; back-pay</text>
+        <text x="170" y="256" text-anchor="middle" fill="rgba(220,38,38,0.7)" font-size="10" font-family="DM Sans,sans-serif">Compounding silently every fortnight</text>
+        <line x1="100" y1="264" x2="240" y2="264" stroke="rgba(165,105,255,0.12)" stroke-width="1"/>
+        <text x="170" y="280" text-anchor="middle" fill="rgba(5,150,105,0.9)" font-size="10.5" font-family="DM Sans,sans-serif" font-weight="600">📊 Lost margin visibility</text>
+        <!-- "HIDDEN" watermark -->
+        <text x="170" y="318" text-anchor="middle" fill="rgba(165,105,255,0.2)" font-size="9" font-family="DM Sans,sans-serif" font-weight="700" letter-spacing="3">HIDDEN FROM YOUR P&amp;L</text>
+      </svg>
+    </div>
+
+    <!-- Right: callout stack -->
+    <div style="display:flex;flex-direction:column;gap:0;justify-content:stretch;">
+      <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:10px;">The five real costs — one by one</div>
+      <div style="display:flex;flex-direction:column;gap:8px;flex:1;">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.15);">
+        <div style="font-size:16px;flex-shrink:0;">⏱</div>
+        <div><div style="font-size:11.5px;font-weight:700;color:var(--text);">Admin time</div><div style="font-size:11px;color:var(--muted);">12–16 hrs/fortnight → $1,000–1,400/month at admin rates</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);">
+        <div style="font-size:16px;flex-shrink:0;">📋</div>
+        <div><div style="font-size:11.5px;font-weight:700;color:var(--text);">SCHADS expertise</div><div style="font-size:11px;color:var(--muted);">Award changes twice a year. Someone must know it — or carry the risk.</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.15);">
+        <div style="font-size:16px;flex-shrink:0;">❌</div>
+        <div><div style="font-size:11.5px;font-weight:700;color:var(--text);">Errors &amp; corrections</div><div style="font-size:11px;color:var(--muted);">36% of audited providers were getting penalty rates wrong</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(217,119,6,0.06);border:1px solid rgba(217,119,6,0.15);">
+        <div style="font-size:16px;flex-shrink:0;">⚖️</div>
+        <div><div style="font-size:11.5px;font-weight:700;color:var(--text);">Compliance exposure</div><div style="font-size:11px;color:var(--muted);">Criminal liability + FWO multi-year sector inquiry since Jan 2025</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.15);">
+        <div style="font-size:16px;flex-shrink:0;">📊</div>
+        <div><div style="font-size:11.5px;font-weight:700;color:var(--text);">Lost profitability</div><div style="font-size:11px;color:var(--muted);">No visibility into which clients, shifts, and locations erode margin</div></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 TIME -->
+<div class="slide" id="s6">
+  <div class="eyebrow">Pillar 1 · Labour Cost</div>
+  <div class="h1">Time — <span>The Most Visible Cost</span></div>
+  <div class="sub">The same fortnightly job. Two completely different realities.</div>
+
+  <!-- BEFORE row -->
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="flex-shrink:0;width:120px;text-align:right;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--red);margin-bottom:2px;">Without EH</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:32px;font-weight:800;color:var(--red);line-height:1;">12–16 hrs</div>
+        <div style="font-size:11px;color:var(--muted);">per fortnight</div>
+      </div>
+      <div style="flex:1;display:flex;gap:4px;align-items:stretch;height:70px;">
+        <!-- Step blocks — manual flow -->
+        <div style="flex:2.5;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">📤</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Export<br>timesheets</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:3;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">📋</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Check SCHADS<br>manually</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:3;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">⌨️</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Re-enter into<br>payroll system</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:2.5;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">🔁</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Find &amp; fix<br>errors</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:2.5;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">📨</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Chase<br>approvals</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:2;background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">🙏</div>
+          <div style="font-size:11px;font-weight:600;color:var(--red);text-align:center;line-height:1.2;">Hope it's<br>correct</div>
+        </div>
+      </div>
+      <div style="flex-shrink:0;width:100px;padding:10px 12px;background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);border-radius:10px;text-align:center;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">@ $35/hr</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--red);">$490</div>
+        <div style="font-size:11px;color:var(--muted);">per run</div>
+      </div>
+    </div>
+
+    <!-- Divider with savings callout -->
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:120px;"></div>
+      <div style="flex:1;height:1px;background:var(--border-soft);"></div>
+      <div style="flex-shrink:0;width:100px;"></div>
+    </div>
+
+    <!-- AFTER row -->
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="flex-shrink:0;width:120px;text-align:right;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--green);margin-bottom:2px;">With EH + ShiftCare</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:32px;font-weight:800;color:var(--green);line-height:1;">1–2 hrs</div>
+        <div style="font-size:11px;color:var(--muted);">per fortnight</div>
+      </div>
+      <div style="flex:1;display:flex;gap:4px;align-items:stretch;height:70px;">
+        <div style="flex:1;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">🔄</div>
+          <div style="font-size:11px;font-weight:600;color:var(--green);text-align:center;line-height:1.2;">Timesheets sync<br>automatically</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:1;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">✅</div>
+          <div style="font-size:11px;font-weight:600;color:var(--green);text-align:center;line-height:1.2;">SCHADS applied<br>automatically</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:1;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">👁️</div>
+          <div style="font-size:11px;font-weight:600;color:var(--green);text-align:center;line-height:1.2;">Review &amp;<br>approve</div>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--muted);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:1;background:rgba(5,150,105,0.1);border:1px solid rgba(5,150,105,0.25);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;">
+          <div style="font-size:13px;">🚀</div>
+          <div style="font-size:11px;font-weight:600;color:var(--green);text-align:center;line-height:1.2;">STP filed.<br>Done.</div>
+        </div>
+        <!-- Faded placeholder blocks to show eliminated steps -->
+        <div style="display:flex;align-items:center;color:rgba(0,0,0,0.1);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:1;background:var(--s2);border:1px dashed var(--border-soft);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;opacity:0.35;">
+          <div style="font-size:10px;">✕</div>
+          <div style="font-size:8px;color:var(--muted);text-align:center;line-height:1.2;">eliminated</div>
+        </div>
+        <div style="display:flex;align-items:center;color:rgba(0,0,0,0.1);font-size:10px;padding:0 1px;">›</div>
+        <div style="flex:1;background:var(--s2);border:1px dashed var(--border-soft);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px 6px;gap:2px;opacity:0.35;">
+          <div style="font-size:10px;">✕</div>
+          <div style="font-size:8px;color:var(--muted);text-align:center;line-height:1.2;">eliminated</div>
+        </div>
+      </div>
+      <div style="flex-shrink:0;width:100px;padding:10px 12px;background:rgba(5,150,105,0.07);border:1px solid rgba(5,150,105,0.2);border-radius:10px;text-align:center;">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:2px;">@ $35/hr</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--green);">$53</div>
+        <div style="font-size:11px;color:var(--muted);">per run</div>
+      </div>
+    </div>
+
+    <!-- Saving summary -->
+    <div style="display:flex;gap:12px;align-items:stretch;margin-top:4px;">
+      <div style="width:120px;flex-shrink:0;"></div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+        <div style="background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.18);border-radius:12px;padding:10px 14px;text-align:center;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--green);">~$437</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">saved per pay run</div>
+        </div>
+        <div style="background:rgba(5,150,105,0.06);border:1px solid rgba(5,150,105,0.18);border-radius:12px;padding:10px 14px;text-align:center;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--green);">~$874</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">saved per month (2 runs)</div>
+        </div>
+        <div style="background:rgba(165,105,255,0.06);border:1px solid rgba(165,105,255,0.18);border-radius:12px;padding:10px 14px;text-align:center;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--purple);">$10,400+</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">annual labour saving alone</div>
+        </div>
+      </div>
+      <div style="width:88px;flex-shrink:0;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 ROI CALC -->
+<div class="slide" id="s7" style="overflow-y:auto;padding:0;">
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+  .roi-embed {
+    --eh-purple: #8B4FD8;
+    --eh-dark: #2D0649;
+    --eh-mid: #5B2D8E;
+    --navy: #242F65;
+    --teal: #0A9EC9;
+    --red: #D42B3A;
+    --green: #00A876;
+    --gold: #D4880A;
+    --bg: #F4F3F8;
+    --surface: #FFFFFF;
+    --surface2: #F0EEF8;
+    --surface3: #E4E1F0;
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1625;
+    --muted: rgba(26,22,37,0.5);
+    --radius: 16px;
+    --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  }
+
+  .roi-embed.dark {
+    --eh-purple: #A569FF;
+    --teal: #13B5EA;
+    --red: #E8394A;
+    --green: #00C48C;
+    --gold: #F5A623;
+    --bg: #0D0D14;
+    --surface: #16161F;
+    --surface2: #1E1E2A;
+    --surface3: #252534;
+    --border: rgba(255,255,255,0.07);
+    --text: #F0EFF8;
+    --muted: rgba(240,239,248,0.45);
+    --shadow: 0 2px 16px rgba(0,0,0,0.3);
+  }
+
+  .roi-embed * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .roi-embed {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  /* ── Background (scoped, not fixed) ── */
+  .roi-embed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(139,79,216,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 30% at 80% 90%, rgba(10,158,201,0.04) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  html.dark .roi-embed::before {
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 10%, rgba(165,105,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 30% at 80% 90%, rgba(19,181,234,0.08) 0%, transparent 50%);
+  }
+
+  /* ── Dark mode toggle (handled by parent page) ── */
+  .roi-embed .toggle-track {
+    width: 32px; height: 18px;
+    background: var(--surface3);
+    border-radius: 100px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .roi-embed .toggle-track.on { background: var(--eh-purple); }
+  .roi-embed .toggle-thumb {
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .roi-embed .toggle-track.on .toggle-thumb { transform: translateX(14px); }
+
+  .roi-embed .page { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 24px 24px 40px; }
+
+  /* ── Header ── */
+  .roi-embed .header { text-align: center; margin-bottom: 24px; }
+
+  .roi-embed .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(165,105,255,0.12);
+    border: 1px solid rgba(165,105,255,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--eh-purple);
+    margin-bottom: 12px;
+  }
+  .roi-embed .eyebrow::before { display: none; }
+  .roi-embed .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--eh-purple); }
+
+  .roi-embed .headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .roi-embed .headline span { color: var(--eh-purple); }
+
+  .roi-embed .sub {
+    font-size: 13px; color: var(--muted);
+    max-width: 560px; margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ── Main grid ── */
+  .roi-embed .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .roi-embed .main-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Cards ── */
+  .roi-embed .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    position: relative;
+    overflow: visible;
+    box-shadow: var(--shadow);
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .roi-embed .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .roi-embed .card.manual::before { background: linear-gradient(to right, var(--red), var(--gold)); }
+  .roi-embed .card.eh::before { background: linear-gradient(to right, var(--eh-purple), var(--teal)); }
+
+  .roi-embed .card-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .roi-embed .card-label.red { color: var(--red); }
+  .roi-embed .card-label.purple { color: var(--eh-purple); }
+
+  .roi-embed .card-icon {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+  .roi-embed .card-icon.red-bg { background: rgba(232,57,74,0.15); }
+  .roi-embed .card-icon.purple-bg { background: rgba(165,105,255,0.15); }
+
+  .roi-embed .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 12px; line-height: 1.2;
+  }
+
+  /* ── Inputs ── */
+  .roi-embed .input-group { margin-bottom: 14px; }
+
+  .roi-embed .input-label {
+    font-size: 12px; font-weight: 600;
+    color: var(--muted);
+    display: flex; justify-content: space-between;
+    align-items: center;
+    margin-bottom: 7px;
+  }
+
+  .roi-embed .input-value {
+    font-size: 13px; font-weight: 700;
+    color: var(--text);
+    background: var(--surface2);
+    padding: 3px 10px; border-radius: 6px;
+  }
+
+  .roi-embed input[type=range] {
+    -webkit-appearance: none;
+    width: 100%; height: 4px;
+    border-radius: 4px;
+    outline: none; cursor: pointer;
+    background: var(--surface3);
+  }
+  .roi-embed input[type=range].red-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 12px rgba(232,57,74,0.5);
+    cursor: pointer; border: 2px solid var(--surface);
+    transition: transform 0.1s;
+  }
+  .roi-embed input[type=range].red-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+  .roi-embed input[type=range].purple-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--eh-purple);
+    box-shadow: 0 0 12px rgba(165,105,255,0.5);
+    cursor: pointer; border: 2px solid var(--surface);
+    transition: transform 0.1s;
+  }
+  .roi-embed input[type=range].purple-range::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+  .roi-embed .input-ticks {
+    display: flex; justify-content: space-between;
+    margin-top: 5px;
+    font-size: 10px; color: var(--muted);
+  }
+
+  /* ── Stat pills inside cards ── */
+  .roi-embed .stat-row {
+    display: flex; gap: 8px; margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .roi-embed .stat-pill {
+    flex: 1; min-width: 120px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 12px;
+    overflow: visible;
+    position: relative;
+  }
+
+  .roi-embed .stat-pill-label { font-size: 10px; color: var(--muted); font-weight: 500; margin-bottom: 2px; }
+  .roi-embed .stat-pill-value { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .roi-embed .stat-pill-value.red { color: var(--red); }
+  .roi-embed .stat-pill-value.purple { color: var(--eh-purple); }
+  .roi-embed .stat-pill-value.green { color: var(--green); }
+  .roi-embed .stat-pill-value.gold { color: var(--gold); }
+
+  /* ── Gaps list ── */
+  .roi-embed .gaps-list { margin-top: 12px; }
+  .roi-embed .gap-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 4px 0; border-bottom: 1px solid var(--border);
+    font-size: 11.5px; color: var(--muted);
+    line-height: 1.4;
+  }
+  .roi-embed .gap-item:last-child { border-bottom: none; }
+  .roi-embed .gap-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    margin-top: 5px; flex-shrink: 0;
+  }
+  .roi-embed .gap-dot.red { background: var(--red); }
+  .roi-embed .gap-dot.gold { background: var(--gold); }
+  .roi-embed .gap-dot.green { background: var(--green); }
+
+  /* ── Full-width result banner ── */
+  .roi-embed .result-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    position: relative;
+    overflow: visible;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    transition: background 0.3s;
+  }
+
+  .roi-embed .result-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(to right, var(--eh-purple), var(--teal), var(--green));
+  }
+
+  .roi-embed .result-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .roi-embed .result-metrics-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+  }
+
+  .roi-embed .result-metric { text-align: center; padding: 8px 16px; position: relative; overflow: visible; }
+  .roi-embed .result-metric-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .roi-embed .result-metric-value {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 2.8vw, 32px);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .roi-embed .result-metric-sub { font-size: 11px; color: var(--muted); }
+
+  .roi-embed .result-divider { width: 1px; background: var(--border); height: 52px; }
+
+  .roi-embed .verdict {
+    background: linear-gradient(135deg, rgba(139,79,216,0.06), rgba(10,158,201,0.04));
+    border: 1px solid rgba(139,79,216,0.15);
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: center;
+  }
+  .roi-embed .verdict strong { color: var(--eh-purple); }
+
+  html.dark .roi-embed .verdict {
+    background: linear-gradient(135deg, rgba(165,105,255,0.08), rgba(19,181,234,0.05));
+    border-color: rgba(165,105,255,0.2);
+  }
+
+  /* ── Comparison table ── */
+  .roi-embed .compare-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    transition: background 0.3s;
+  }
+  .roi-embed .compare-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .roi-embed .compare-table { width: 100%; border-collapse: collapse; }
+  .roi-embed .compare-table th {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    text-align: left; padding: 0 10px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .roi-embed .compare-table th:not(:first-child) { text-align: center; }
+  .roi-embed .compare-table td {
+    padding: 5px 10px;
+    font-size: 11.5px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .roi-embed .compare-table tr:last-child td { border-bottom: none; }
+  .roi-embed .compare-table td:not(:first-child) { text-align: center; }
+  .roi-embed .compare-table td:first-child { color: var(--muted); }
+
+  .roi-embed .check { color: var(--green); font-size: 16px; }
+  .roi-embed .cross { color: var(--red); font-size: 16px; }
+  .roi-embed .warn { color: var(--gold); font-size: 13px; font-weight: 600; }
+
+  /* ── Breakdown bars ── */
+  .roi-embed .breakdown-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+    transition: background 0.3s;
+  }
+
+  .roi-embed .breakdown-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .roi-embed .breakdown-row {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px;
+  }
+  .roi-embed .breakdown-label { font-size: 11px; color: var(--muted); width: 180px; flex-shrink: 0; }
+  .roi-embed .breakdown-bar-wrap { flex: 1; background: var(--surface3); border-radius: 4px; height: 6px; overflow: hidden; }
+  .roi-embed .breakdown-bar { height: 100%; border-radius: 4px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+  .roi-embed .breakdown-amount { font-size: 11px; font-weight: 700; width: 72px; text-align: right; flex-shrink: 0; }
+
+  /* ── Assumption note ── */
+  .roi-embed .assumption-note {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .roi-embed .assumption-note strong { color: var(--text); }
+
+  /* ── Animated number ── */
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .roi-embed .animate-val { animation: countUp 0.3s ease forwards; }
+
+  /* ── EH pricing input ── */
+  .roi-embed .pricing-row {
+    display: flex; gap: 10px; margin-top: 10px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .roi-embed .pricing-label { font-size: 12px; color: var(--muted); flex-shrink: 0; }
+  .roi-embed .pricing-input {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 7px 12px;
+    color: var(--text); font-size: 13px; font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    width: 90px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .roi-embed .pricing-input:focus { border-color: rgba(165,105,255,0.5); }
+  .roi-embed .pricing-note { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  /* ── Role selector ── */
+  .roi-embed .role-selector {
+    display: flex; gap: 6px; margin-bottom: 16px;
+  }
+  .roi-embed .role-btn {
+    flex: 1;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface2);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .roi-embed .role-btn:hover { border-color: var(--eh-purple); color: var(--text); }
+  .roi-embed .role-btn.active { background: rgba(139,79,216,0.1); border-color: var(--eh-purple); color: var(--eh-purple); }
+  .roi-embed .role-btn .role-rate { font-weight: 700; margin-left: 3px; }
+
+  /* ── Tooltips ── */
+  .roi-embed .has-tooltip {
+    position: relative;
+    cursor: help;
+    display: block;
+  }
+  .roi-embed .stat-pill-value.has-tooltip,
+  .roi-embed .result-metric-value.has-tooltip {
+    display: block;
+    position: relative;
+  }
+  .roi-embed .has-tooltip::after {
+    content: ' ⓘ';
+    font-size: 10px;
+    opacity: 0.4;
+    vertical-align: super;
+    font-family: sans-serif;
+  }
+  .roi-embed .tooltip-box {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    z-index: 9999;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1A1625;
+    color: #F0EFF8;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 11.5px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    white-space: nowrap;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    pointer-events: none;
+    transition: opacity 0.18s, transform 0.18s;
+    transform: translateX(-50%) translateY(4px);
+    min-width: 220px;
+    max-width: 300px;
+    white-space: normal;
+    text-align: left;
+  }
+  .roi-embed .tooltip-box strong { font-weight: 700; display: block; margin-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 4px; color: #fff; }
+  .roi-embed .tooltip-box .calc-line { display: flex; justify-content: space-between; gap: 12px; margin-top: 3px; font-size: 11px; opacity: 0.85; }
+  .roi-embed .tooltip-box .calc-line span:last-child { font-weight: 600; opacity: 1; }
+  .roi-embed .tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1A1625;
+  }
+  .roi-embed .has-tooltip:hover .tooltip-box {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  /* keep tooltip on screen when near edges */
+  .roi-embed .tooltip-left .tooltip-box { left: 0; transform: translateX(0); }
+  .roi-embed .tooltip-left .tooltip-box::after { left: 20px; }
+  .roi-embed .tooltip-left:hover .tooltip-box { transform: translateX(0) translateY(0); }
+  .roi-embed .tooltip-right .tooltip-box { left: auto; right: 0; transform: translateX(0); }
+  .roi-embed .tooltip-right .tooltip-box::after { left: auto; right: 20px; }
+  .roi-embed .tooltip-right:hover .tooltip-box { transform: translateX(0) translateY(0); }
+
+  /* ── Export / Share button ── */
+  .roi-embed .export-btn {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    width: 100%;
+    margin-top: 16px;
+    background: var(--eh-purple);
+    border: none;
+    border-radius: 10px;
+    padding: 11px 16px;
+    cursor: pointer;
+    font-size: 13px; font-weight: 600;
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(139,79,216,0.3);
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    user-select: none;
+  }
+  .roi-embed .export-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(139,79,216,0.45); }
+  .roi-embed .export-btn:active { transform: translateY(0); }
+
+  /* ── Share modal ── */
+  .roi-embed .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+  .roi-embed .modal-overlay.open { display: flex; }
+  .roi-embed .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    width: 100%; max-width: 460px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    position: relative;
+  }
+  .roi-embed .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .roi-embed .modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+  .roi-embed .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--surface2); border: none;
+    width: 28px; height: 28px; border-radius: 50%;
+    cursor: pointer; font-size: 14px; color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .roi-embed .modal-close:hover { color: var(--text); background: var(--surface3); }
+
+  .roi-embed .share-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: all 0.15s;
+    background: var(--surface2);
+  }
+  .roi-embed .share-option:hover { border-color: var(--eh-purple); background: rgba(139,79,216,0.06); }
+  .roi-embed .share-option:last-child { margin-bottom: 0; }
+  .roi-embed .share-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .roi-embed .share-icon.purple { background: rgba(139,79,216,0.12); }
+  .roi-embed .share-icon.blue { background: rgba(10,158,201,0.12); }
+  .roi-embed .share-icon.green { background: rgba(0,168,118,0.12); }
+  .roi-embed .share-option-text { flex: 1; }
+  .roi-embed .share-option-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .roi-embed .share-option-desc { font-size: 11px; color: var(--muted); }
+
+  .roi-embed .snapshot-summary {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .roi-embed .snapshot-summary strong { color: var(--text); }
+
+  .roi-embed .copy-link-row {
+    display: flex; gap: 8px; margin-top: 10px;
+  }
+  .roi-embed .copy-link-input {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: var(--muted);
+    font-family: monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+    outline: none;
+  }
+  .roi-embed .copy-btn {
+    background: var(--eh-purple);
+    color: #fff; border: none;
+    border-radius: 8px; padding: 8px 14px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer; white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.15s;
+  }
+  .roi-embed .copy-btn:hover { opacity: 0.85; }
+
+  @keyframes fadeIn { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+  .roi-embed .modal-overlay.open .modal { animation: fadeIn 0.2s ease; }
+
+.roi-embed { font-family: "DM Sans", sans-serif; }
+.roi-embed .page { padding: 14px 20px 20px; max-width:100%; }
+.roi-embed .header { margin-bottom: 14px; }
+.roi-embed .headline { font-size: clamp(16px, 2vw, 22px); }
+</style>
+<div class="roi-embed" id="roiEmbed">
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <div class="header">
+    <div class="eyebrow"><span class="eyebrow-dot"></span> ROI Calculator</div>
+    <h1 class="headline">How much is <span>manual payroll</span> really costing you?</h1>
+    <p class="sub">Compare the true cost of processing SCHADS payroll manually against Employment Hero Payroll's automated award interpretation.</p>
+  </div>
+
+  <!-- ── INPUT CARDS ── -->
+  <div class="main-grid">
+
+    <!-- Manual side -->
+    <div class="card manual">
+      <div class="card-label red">
+        <div class="card-icon red-bg">⚠️</div>
+        Current State — Manual Payroll
+      </div>
+      <div class="card-title">Your business today</div>
+
+      <div class="input-group">
+        <div class="input-label">
+          Number of employees
+          <span class="input-value" id="empVal">25</span>
+        </div>
+        <input type="range" class="red-range" id="empSlider" min="5" max="200" value="25" step="5" oninput="roiCalcUpdate()">
+        <div class="input-ticks"><span>5</span><span>50</span><span>100</span><span>150</span><span>200</span></div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">
+          Hours spent on payroll per week
+          <span class="input-value" id="hoursVal">8 hrs</span>
+        </div>
+        <input type="range" class="red-range" id="hoursSlider" min="2" max="40" value="8" step="1" oninput="roiCalcUpdate()">
+        <div class="input-ticks"><span>2</span><span>10</span><span>20</span><span>30</span><span>40</span></div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">
+          Payroll staff hourly rate ($/hr)
+          <span class="input-value" id="rateVal">$45/hr</span>
+        </div>
+        <input type="range" class="red-range" id="rateSlider" min="25" max="100" value="45" step="5" oninput="roiCalcUpdate()">
+        <div class="input-ticks"><span>$25</span><span>$45</span><span>$65</span><span>$85</span><span>$100</span></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-pill">
+          <div class="stat-pill-label">Weekly cost</div>
+          <div class="stat-pill-value red has-tooltip" id="weeklyManual">—<div class="tooltip-box" id="tt-weeklyManual"></div></div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-label">Annual cost</div>
+          <div class="stat-pill-value red has-tooltip" id="annualManual">—<div class="tooltip-box" id="tt-annualManual"></div></div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-label">Hours/year</div>
+          <div class="stat-pill-value gold has-tooltip" id="hoursYear">—<div class="tooltip-box" id="tt-hoursYear"></div></div>
+        </div>
+      </div>
+
+      <div class="gaps-list">
+        <div class="gap-item"><div class="gap-dot red"></div>No automatic SCHADS award interpretation</div>
+        <div class="gap-item"><div class="gap-dot red"></div>Manual penalty rate & allowance calculation each run</div>
+        <div class="gap-item"><div class="gap-dot red"></div>Annual award rate updates applied by hand</div>
+        <div class="gap-item"><div class="gap-dot red"></div>Compliance risk — underpayment exposure</div>
+        <div class="gap-item"><div class="gap-dot gold"></div>Spreadsheet or third-party tool dependency</div>
+        <div class="gap-item"><div class="gap-dot gold"></div>Key-person risk if payroll admin leaves</div>
+      </div>
+    </div>
+
+    <!-- EH side -->
+    <div class="card eh">
+      <div class="card-label purple">
+        <div class="card-icon purple-bg">✦</div>
+        Employment Hero Payroll
+      </div>
+      <div class="card-title">With automated award interpretation</div>
+
+      <div class="input-group">
+        <div class="input-label">
+          Estimated time reduction
+          <span class="input-value" id="reductionVal">80%</span>
+        </div>
+        <input type="range" class="purple-range" id="reductionSlider" min="50" max="95" value="80" step="5" oninput="roiCalcUpdate()">
+        <div class="input-ticks"><span>50%</span><span>65%</span><span>80%</span><span>95%</span></div>
+      </div>
+
+      <div class="pricing-row" style="margin-top:10px;">
+        <span class="pricing-label">EH Payroll cost per employee/month</span>
+        <span class="input-value" style="font-size:14px; padding: 5px 12px;">$10 / employee</span>
+        <input type="hidden" id="ehPriceInput" value="10">
+      </div>
+
+      <div class="stat-row" style="margin-top:24px;">
+        <div class="stat-pill">
+          <div class="stat-pill-label">Platform cost/yr</div>
+          <div class="stat-pill-value purple has-tooltip" id="ehPlatformCost">—<div class="tooltip-box" id="tt-ehPlatformCost"></div></div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-label">Remaining labour</div>
+          <div class="stat-pill-value purple has-tooltip" id="ehLabourCost">—<div class="tooltip-box" id="tt-ehLabourCost"></div></div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-pill-label">Total annual cost</div>
+          <div class="stat-pill-value green has-tooltip" id="ehTotalCost">—<div class="tooltip-box" id="tt-ehTotalCost"></div></div>
+        </div>
+      </div>
+
+      <div class="gaps-list">
+        <div class="gap-item"><div class="gap-dot green"></div>SCHADS award auto-interpreted on every pay run</div>
+        <div class="gap-item"><div class="gap-dot green"></div>Penalty rates, loadings & allowances calculated automatically</div>
+        <div class="gap-item"><div class="gap-dot green"></div>Annual award rate updates applied automatically</div>
+        <div class="gap-item"><div class="gap-dot green"></div>STP, super & ATO compliance built in</div>
+        <div class="gap-item"><div class="gap-dot green"></div>Integrated onboarding, contracts & HR tools</div>
+        <div class="gap-item"><div class="gap-dot green"></div>ShiftCare timesheet sync — no double handling</div>
+      </div>
+
+      <button class="export-btn" onclick="openShareModal()" aria-label="Share this calculation">
+        🔗 Share this calculation
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- ── RESULT BANNER ── -->
+  <div class="result-banner">
+    <div class="result-inner">
+      <div class="result-metrics-row">
+        <div class="result-metric">
+          <div class="result-metric-label">Annual saving</div>
+          <div class="result-metric-value has-tooltip" id="annualSaving" style="color: var(--green);">—<div class="tooltip-box" id="tt-annualSaving"></div></div>
+          <div class="result-metric-sub">in labour cost recovered</div>
+        </div>
+        <div class="result-divider"></div>
+        <div class="result-metric">
+          <div class="result-metric-label">Hours freed per year</div>
+          <div class="result-metric-value has-tooltip" id="hoursSaved" style="color: var(--teal);">—<div class="tooltip-box" id="tt-hoursSaved"></div></div>
+          <div class="result-metric-sub">returned to your team</div>
+        </div>
+        <div class="result-divider"></div>
+        <div class="result-metric">
+          <div class="result-metric-label">ROI</div>
+          <div class="result-metric-value has-tooltip tooltip-right" id="roiVal" style="color: var(--eh-purple);">—<div class="tooltip-box" id="tt-roiVal"></div></div>
+          <div class="result-metric-sub">return on platform investment</div>
+        </div>
+      </div>
+      <div class="verdict" id="verdictText">—</div>
+    </div>
+  </div>
+
+  <!-- ── BREAKDOWN BARS ── -->
+  <div class="main-grid">
+    <div class="breakdown-card">
+      <div class="breakdown-title">Manual payroll — annual cost breakdown</div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Labour (payroll processing)</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-labour" style="background: var(--red); width:0%"></div></div>
+        <div class="breakdown-amount red" id="bar-labour-val" style="color:var(--red);">—</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Compliance risk buffer*</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-risk" style="background: var(--gold); width:0%"></div></div>
+        <div class="breakdown-amount" id="bar-risk-val" style="color:var(--gold);">—</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Third-party tools / spreadsheets*</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-tools" style="background: #888; width:0%"></div></div>
+        <div class="breakdown-amount" id="bar-tools-val" style="color:#aaa;">—</div>
+      </div>
+    </div>
+
+    <div class="breakdown-card">
+      <div class="breakdown-title">Employment Hero Payroll — annual cost breakdown</div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Platform licence</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-eh-platform" style="background: var(--eh-purple); width:0%"></div></div>
+        <div class="breakdown-amount" id="bar-eh-platform-val" style="color:var(--eh-purple);">—</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Remaining payroll labour</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-eh-labour" style="background: var(--teal); width:0%"></div></div>
+        <div class="breakdown-amount" id="bar-eh-labour-val" style="color:var(--teal);">—</div>
+      </div>
+      <div class="breakdown-row">
+        <div class="breakdown-label">Compliance risk (near zero)</div>
+        <div class="breakdown-bar-wrap"><div class="breakdown-bar" id="bar-eh-risk" style="background: var(--green); width: 3%"></div></div>
+        <div class="breakdown-amount" id="bar-eh-risk-val" style="color:var(--green);">~$0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEATURE TABLE ── -->
+  <div class="compare-card" style="margin-top:20px;">
+    <div class="compare-title">Feature comparison</div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Manual / Accounting Platform</th>
+          <th>Employment Hero Payroll</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>SCHADS award auto-interpretation</td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Penalty rates & shift loadings</td><td><span class="warn">Manual</span></td><td><span class="check">✓ Automated</span></td></tr>
+        <tr><td>Broken shift & sleepover allowances</td><td><span class="warn">Manual</span></td><td><span class="check">✓ Automated</span></td></tr>
+        <tr><td>Travel time & km allowances</td><td><span class="warn">Manual</span></td><td><span class="check">✓ Automated</span></td></tr>
+        <tr><td>Annual award rate updates</td><td><span class="warn">Manual</span></td><td><span class="check">✓ Automatic</span></td></tr>
+        <tr><td>Pay point progression</td><td><span class="cross">✕</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>ShiftCare timesheet sync</td><td><span class="check">✓ Basic</span></td><td><span class="check">✓ Full native sync</span></td></tr>
+        <tr><td>STP & ATO compliance</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Leave management & approvals</td><td><span class="warn">Basic</span></td><td><span class="check">✓ Full</span></td></tr>
+        <tr><td>Underpayment risk</td><td><span class="cross">High</span></td><td><span class="check">Minimal</span></td></tr>
+        <tr><td>Employee headcount caps</td><td><span class="warn">Sometimes</span></td><td><span class="check">No caps</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="assumption-note">
+    <strong>Assumptions & notes:</strong> Labour cost calculation based on weekly payroll hours × hourly rate × 52 weeks.
+    Compliance risk buffer estimated at 15% of annual labour cost to account for underpayment exposure, error correction and potential FWO investigation.
+    Third-party tools estimated at $1,200/year (spreadsheet maintenance, award interpretation tools, etc.).
+    Employment Hero Payroll is priced at <strong>$10 per employee per month</strong>.
+    Time reduction is based on client-reported outcomes; individual results may vary.
+    * These are indicative estimates to illustrate true cost of ownership.
+  </div>
+
+</div>
+<!-- ── SHARE / EXPORT MODAL ── -->
+<div class="modal-overlay" id="shareModal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeShareModal()">✕</button>
+    <div class="modal-title">Export &amp; Share</div>
+    <div class="modal-sub">Share your ROI calculation with your team or save it for later.</div>
+
+    <div class="snapshot-summary" id="snapshotSummary">—</div>
+
+    <div class="share-option" onclick="printPage()">
+      <div class="share-icon blue">🖨️</div>
+      <div class="share-option-text">
+        <div class="share-option-label">Print / Save as PDF</div>
+        <div class="share-option-desc">Print the calculator or save to PDF via your browser's print dialog</div>
+      </div>
+    </div>
+
+    <div class="share-option" onclick="copyShareableLink()">
+      <div class="share-icon green">🔗</div>
+      <div class="share-option-text">
+        <div class="share-option-label">Copy shareable link</div>
+        <div class="share-option-desc">Generates a URL with your inputs encoded — paste and share directly</div>
+      </div>
+      <div class="copy-link-row" id="copyLinkRow" style="display:none; width:100%; margin-top:10px;">
+        <input class="copy-link-input" id="shareUrl" readonly>
+        <button class="copy-btn" onclick="doCopy(event)">Copy</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+(function() {
+
+  const fmt = (n) => '$' + Math.round(n).toLocaleString('en-AU');
+  const fmtHrs = (n) => Math.round(n).toLocaleString('en-AU') + ' hrs';
+  const fmtPct = (n) => Math.round(n) + '%';
+
+  function animateVal(el, newText) {
+    // Find or create the text span (leaves tooltip-box child intact)
+    let span = el.querySelector('.val-text');
+    if (!span) {
+      // First run: wrap existing text node in a span
+      span = document.createElement('span');
+      span.className = 'val-text';
+      // Move all text nodes into the span
+      const nodes = Array.from(el.childNodes).filter(n => n.nodeType === 3);
+      nodes.forEach(n => n.remove());
+      el.insertBefore(span, el.firstChild);
+    }
+    span.style.animation = 'none';
+    void span.offsetWidth;
+    span.textContent = newText;
+    span.style.animation = 'countUp 0.3s ease forwards';
+  }
+
+  function setTT(id, html) {
+    const el = document.getElementById('tt-' + id);
+    if (el) el.innerHTML = html;
+  }
+
+  function calcLine(label, val) {
+    return `<div class="calc-line"><span>${label}</span><span>${val}</span></div>`;
+  }
+
+  function updateTooltips(emp, hours, rate, reduction, ehPrice, weeklyManual, annualManual, hoursYear, riskBuffer, toolsCost, totalManual, ehPlatformCost, ehHoursWeek, ehLabourCost, ehTotal, saving, hoursSaved, roi) {
+    setTT('weeklyManual',
+      `<strong>Weekly payroll cost</strong>` +
+      calcLine('Hours per week', hours + ' hrs') +
+      calcLine('× Hourly rate', '$' + rate) +
+      calcLine('= Weekly cost', fmt(weeklyManual))
+    );
+    setTT('annualManual',
+      `<strong>Annual labour cost</strong>` +
+      calcLine('Weekly cost', fmt(weeklyManual)) +
+      calcLine('× 52 weeks', fmt(annualManual))
+    );
+    setTT('hoursYear',
+      `<strong>Total hours per year</strong>` +
+      calcLine('Hours per week', hours + ' hrs') +
+      calcLine('× 52 weeks', hoursYear + ' hrs')
+    );
+    setTT('ehPlatformCost',
+      `<strong>EH platform licence</strong>` +
+      calcLine('Employees', emp) +
+      calcLine('× $' + ehPrice + '/emp/month', '') +
+      calcLine('× 12 months', fmt(ehPlatformCost))
+    );
+    setTT('ehLabourCost',
+      `<strong>Remaining labour cost</strong>` +
+      calcLine('Time reduction', reduction + '%') +
+      calcLine('Remaining hrs/week', ehHoursWeek.toFixed(1) + ' hrs') +
+      calcLine('× Rate × 52 wks', fmt(ehLabourCost))
+    );
+    setTT('ehTotalCost',
+      `<strong>Total annual EH cost</strong>` +
+      calcLine('Platform licence', fmt(ehPlatformCost)) +
+      calcLine('+ Remaining labour', fmt(ehLabourCost)) +
+      calcLine('= Total', fmt(ehTotal))
+    );
+    setTT('annualSaving',
+      `<strong>Annual saving</strong>` +
+      calcLine('Manual total', fmt(totalManual)) +
+      calcLine('  Labour', fmt(annualManual)) +
+      calcLine('  Risk buffer (15%)', fmt(riskBuffer)) +
+      calcLine('  Tools est.', fmt(toolsCost)) +
+      calcLine('− EH total', fmt(ehTotal)) +
+      calcLine('= Saving', fmt(saving))
+    );
+    setTT('hoursSaved',
+      `<strong>Hours freed per year</strong>` +
+      calcLine('Annual hours', hoursYear + ' hrs') +
+      calcLine('× Time reduction', reduction + '%') +
+      calcLine('= Hours freed', Math.round(hoursSaved) + ' hrs')
+    );
+    setTT('roiVal',
+      `<strong>Return on investment</strong>` +
+      calcLine('Annual saving', fmt(saving)) +
+      calcLine('÷ Platform cost', fmt(ehPlatformCost)) +
+      calcLine('= ROI multiplier', roi.toFixed(1) + 'x')
+    );
+  }
+
+    function roiCalcUpdate() {
+    const emp       = parseInt(document.getElementById('empSlider').value);
+    const hours     = parseInt(document.getElementById('hoursSlider').value);
+    const rate      = parseInt(document.getElementById('rateSlider').value);
+    const reduction = parseInt(document.getElementById('reductionSlider').value);
+    const ehPrice   = parseFloat(document.getElementById('ehPriceInput').value) || 8;
+
+    // Update display labels
+    document.getElementById('empVal').textContent = emp;
+    document.getElementById('hoursVal').textContent = hours + ' hrs';
+    document.getElementById('rateVal').textContent = '$' + rate + '/hr';
+    document.getElementById('reductionVal').textContent = reduction + '%';
+
+    // Manual calculations
+    const weeklyManual   = hours * rate;
+    const annualManual   = weeklyManual * 52;
+    const hoursYear      = hours * 52;
+    const riskBuffer     = annualManual * 0.15;
+    const toolsCost      = 1200;
+    const totalManual    = annualManual + riskBuffer + toolsCost;
+
+    // EH calculations
+    const ehPlatformCost  = emp * ehPrice * 12;
+    const ehHoursWeek     = hours * (1 - reduction / 100);
+    const ehLabourCost    = ehHoursWeek * rate * 52;
+    const ehTotal         = ehPlatformCost + ehLabourCost;
+
+    // Savings
+    const saving     = totalManual - ehTotal;
+    const hoursSaved = hoursYear * (reduction / 100);
+    const roi        = ehPlatformCost > 0 ? (saving / ehPlatformCost) : 0;
+
+    // Update stat pills - manual
+    animateVal(document.getElementById('weeklyManual'), fmt(weeklyManual));
+    animateVal(document.getElementById('annualManual'), fmt(annualManual));
+    animateVal(document.getElementById('hoursYear'), fmtHrs(hoursYear));
+
+    // Update stat pills - EH
+    animateVal(document.getElementById('ehPlatformCost'), fmt(ehPlatformCost));
+    animateVal(document.getElementById('ehLabourCost'), fmt(ehLabourCost));
+    animateVal(document.getElementById('ehTotalCost'), fmt(ehTotal));
+
+    // Update results
+    animateVal(document.getElementById('annualSaving'), fmt(saving));
+    animateVal(document.getElementById('hoursSaved'), fmtHrs(hoursSaved));
+    animateVal(document.getElementById('roiVal'), roi.toFixed(1) + 'x');
+
+    // Verdict
+    const verdictEl = document.getElementById('verdictText');
+    const costPerEmpManual = Math.round(totalManual / emp);
+    const costPerEmpEH = Math.round(ehTotal / emp);
+    verdictEl.innerHTML = `With <strong>${emp} employees</strong> and <strong>${hours} hours of payroll work per week</strong>, manual processing costs you roughly <strong>${fmt(costPerEmpManual)} per employee per year</strong> — compared to just <strong>${fmt(costPerEmpEH)} per employee per year</strong> with Employment Hero Payroll. That's <strong>${fmt(saving)} back</strong> and <strong>${fmtHrs(hoursSaved)} returned</strong> to your team every year, with significantly lower compliance risk.`;
+
+    // Bars — manual side
+    const manualMax = totalManual;
+    const setBar = (id, val, max) => {
+      const pct = Math.min(100, Math.round((val / max) * 100));
+      document.getElementById(id).style.width = pct + '%';
+    };
+    setBar('bar-labour', annualManual, manualMax);
+    setBar('bar-risk', riskBuffer, manualMax);
+    setBar('bar-tools', toolsCost, manualMax);
+    document.getElementById('bar-labour-val').textContent = fmt(annualManual);
+    document.getElementById('bar-risk-val').textContent = fmt(riskBuffer);
+    document.getElementById('bar-tools-val').textContent = fmt(toolsCost);
+
+    // Bars — EH side
+    const ehMax = Math.max(totalManual, ehTotal);
+    setBar('bar-eh-platform', ehPlatformCost, ehMax);
+    setBar('bar-eh-labour', ehLabourCost, ehMax);
+    document.getElementById('bar-eh-platform-val').textContent = fmt(ehPlatformCost);
+    document.getElementById('bar-eh-labour-val').textContent = fmt(ehLabourCost);
+
+    updateTooltips(emp, hours, rate, reduction, ehPrice, weeklyManual, annualManual, hoursYear, riskBuffer, toolsCost, totalManual, ehPlatformCost, ehHoursWeek, ehLabourCost, ehTotal, saving, hoursSaved, roi);
+  }
+
+
+  function openShareModal() {
+    // Build snapshot summary from current values
+    const emp = document.getElementById('empSlider').value;
+    const hours = document.getElementById('hoursSlider').value;
+    const rate = document.getElementById('rateSlider').value;
+    const reduction = document.getElementById('reductionSlider').value;
+    const saving = document.getElementById('annualSaving').querySelector('.val-text')?.textContent || document.getElementById('annualSaving').textContent;
+    const hoursSaved = document.getElementById('hoursSaved').querySelector('.val-text')?.textContent || document.getElementById('hoursSaved').textContent;
+    const roi = document.getElementById('roiVal').querySelector('.val-text')?.textContent || document.getElementById('roiVal').textContent;
+
+    document.getElementById('snapshotSummary').innerHTML =
+      `<strong>${emp} employees</strong> · <strong>${hours} hrs/week</strong> · <strong>$${rate}/hr</strong> · <strong>${reduction}% time reduction</strong><br>` +
+      `Annual saving: <strong>${saving}</strong> &nbsp;·&nbsp; Hours freed: <strong>${hoursSaved}</strong> &nbsp;·&nbsp; ROI: <strong>${roi}</strong>`;
+
+    document.getElementById('copyLinkRow').style.display = 'none';
+    document.getElementById('shareModal').classList.add('open');
+  }
+
+  function closeShareModal() {
+    document.getElementById('shareModal').classList.remove('open');
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('shareModal')) closeShareModal();
+  }
+
+  function printPage() {
+    closeShareModal();
+    setTimeout(() => window.print(), 200);
+  }
+
+  function copyShareableLink() {
+    const emp = document.getElementById('empSlider').value;
+    const hours = document.getElementById('hoursSlider').value;
+    const rate = document.getElementById('rateSlider').value;
+    const reduction = document.getElementById('reductionSlider').value;
+    const params = new URLSearchParams({ emp, hours, rate, reduction });
+    const url = window.location.href.split('?')[0] + '?' + params.toString();
+    document.getElementById('shareUrl').value = url;
+    document.getElementById('copyLinkRow').style.display = 'flex';
+  }
+
+  function doCopy(e) {
+    e.stopPropagation();
+    const input = document.getElementById('shareUrl');
+    input.select();
+    navigator.clipboard.writeText(input.value).then(() => {
+      const btn = e.target;
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+  }
+
+  // Load params from URL on page load
+  function loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('emp'))       { document.getElementById('empSlider').value = params.get('emp'); }
+    if (params.get('hours'))     { document.getElementById('hoursSlider').value = params.get('hours'); }
+    if (params.get('rate'))      { document.getElementById('rateSlider').value = params.get('rate'); }
+    if (params.get('reduction')) { document.getElementById('reductionSlider').value = params.get('reduction'); }
+  }
+
+  // Init
+  // init deferred
+
+  window.openShareModal = openShareModal;
+  window.closeShareModal = closeShareModal;
+  window.closeModalOutside = closeModalOutside;
+  window.printPage = printPage;
+  window.copyShareableLink = copyShareableLink;
+  window.doCopy = doCopy;
+  window.roiCalcUpdate = roiCalcUpdate;
+  window.loadFromURL = loadFromURL;
+})();
+</script>
+<script>
+  if (typeof loadFromURL === 'function') { loadFromURL(); }
+  if (typeof roiCalcUpdate === 'function') { roiCalcUpdate(); }
+</script>
+</div>
+
+<!-- S8 SCHADS -->
+<div class="slide" id="s8">
+  <div class="eyebrow">Pillar 2 · Labour Cost</div>
+  <div class="h1">SCHADS — <span>The Most Complex Award in Australia</span></div>
+  <div class="sub">Someone in your business is carrying all of this manually. EH carries it instead.</div>
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+    <!-- LEFT: Spider/web diagram of SCHADS complexity -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;padding:12px;position:relative;overflow:hidden;">
+      <svg viewBox="0 0 300 260" style="width:100%;height:100%;max-height:100%;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Spoke lines from centre -->
+        <g stroke="rgba(165,105,255,0.15)" stroke-width="1">
+          <line x1="150" y1="128" x2="150" y2="22"/>
+          <line x1="150" y1="128" x2="248" y2="62"/>
+          <line x1="150" y1="128" x2="272" y2="168"/>
+          <line x1="150" y1="128" x2="210" y2="236"/>
+          <line x1="150" y1="128" x2="90" y2="236"/>
+          <line x1="150" y1="128" x2="28" y2="168"/>
+          <line x1="150" y1="128" x2="52" y2="62"/>
+          <line x1="150" y1="128" x2="230" y2="128"/>
+          <line x1="150" y1="128" x2="70" y2="128"/>
+        </g>
+        <!-- Centre node -->
+        <circle cx="150" cy="128" r="30" fill="rgba(165,105,255,0.1)" stroke="var(--purple)" stroke-width="1.5"/>
+        <text x="150" y="123" text-anchor="middle" fill="var(--purple)" font-size="10" font-family="DM Sans,sans-serif" font-weight="700">SCHADS</text>
+        <text x="150" y="136" text-anchor="middle" fill="var(--purple)" font-size="9" font-family="DM Sans,sans-serif">Award</text>
+        <!-- Outer nodes -->
+        <!-- Top -->
+        <circle cx="150" cy="22" r="22" fill="rgba(220,38,38,0.08)" stroke="rgba(220,38,38,0.3)" stroke-width="1.2"/>
+        <text x="150" y="18" text-anchor="middle" fill="var(--red)" font-size="8.5" font-family="DM Sans,sans-serif" font-weight="600">9 Pay</text>
+        <text x="150" y="29" text-anchor="middle" fill="var(--red)" font-size="8.5" font-family="DM Sans,sans-serif" font-weight="600">Levels</text>
+        <!-- Top-right -->
+        <circle cx="248" cy="62" r="22" fill="rgba(217,119,6,0.08)" stroke="rgba(217,119,6,0.3)" stroke-width="1.2"/>
+        <text x="248" y="58" text-anchor="middle" fill="var(--gold)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Broken</text>
+        <text x="248" y="69" text-anchor="middle" fill="var(--gold)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Shifts</text>
+        <!-- Right -->
+        <circle cx="272" cy="168" r="22" fill="rgba(81,117,209,0.08)" stroke="rgba(81,117,209,0.3)" stroke-width="1.2"/>
+        <text x="272" y="164" text-anchor="middle" fill="var(--teal)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Sleepover</text>
+        <text x="272" y="175" text-anchor="middle" fill="var(--teal)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">&amp; On-Call</text>
+        <!-- Bottom-right -->
+        <circle cx="210" cy="236" r="22" fill="rgba(220,38,38,0.08)" stroke="rgba(220,38,38,0.3)" stroke-width="1.2"/>
+        <text x="210" y="232" text-anchor="middle" fill="var(--red)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">ERO</text>
+        <text x="210" y="243" text-anchor="middle" fill="var(--red)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Loadings</text>
+        <!-- Bottom-left -->
+        <circle cx="90" cy="236" r="22" fill="rgba(5,150,105,0.08)" stroke="rgba(5,150,105,0.3)" stroke-width="1.2"/>
+        <text x="90" y="232" text-anchor="middle" fill="var(--green)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Travel</text>
+        <text x="90" y="243" text-anchor="middle" fill="var(--green)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Allowances</text>
+        <!-- Left -->
+        <circle cx="28" cy="168" r="22" fill="rgba(217,119,6,0.08)" stroke="rgba(217,119,6,0.3)" stroke-width="1.2"/>
+        <text x="28" y="164" text-anchor="middle" fill="var(--gold)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Casual</text>
+        <text x="28" y="175" text-anchor="middle" fill="var(--gold)" font-size="8" font-family="DM Sans,sans-serif" font-weight="600">Loading</text>
+        <!-- Top-left -->
+        <circle cx="52" cy="62" r="22" fill="rgba(81,117,209,0.08)" stroke="rgba(81,117,209,0.3)" stroke-width="1.2"/>
+        <text x="52" y="58" text-anchor="middle" fill="var(--teal)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">10-hr Rest</text>
+        <text x="52" y="69" text-anchor="middle" fill="var(--teal)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">Breaks</text>
+        <!-- Right mid -->
+        <circle cx="230" cy="128" r="20" fill="rgba(220,38,38,0.08)" stroke="rgba(220,38,38,0.25)" stroke-width="1.2"/>
+        <text x="230" y="124" text-anchor="middle" fill="var(--red)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">Rate ×2</text>
+        <text x="230" y="135" text-anchor="middle" fill="var(--red)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">per year</text>
+        <!-- Left mid -->
+        <circle cx="70" cy="128" r="20" fill="rgba(165,105,255,0.08)" stroke="rgba(165,105,255,0.25)" stroke-width="1.2"/>
+        <text x="70" y="124" text-anchor="middle" fill="var(--purple)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">2 Wage</text>
+        <text x="70" y="135" text-anchor="middle" fill="var(--purple)" font-size="7.5" font-family="DM Sans,sans-serif" font-weight="600">Tables</text>
+      </svg>
+      <div style="position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:9.5px;color:var(--muted);font-weight:600;letter-spacing:0.08em;">EVERY NODE = MANUAL KNOWLEDGE YOUR TEAM MUST CARRY</div>
+    </div>
+
+    <!-- RIGHT: consequence cards -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card card-gold">
+        <div class="row" style="gap:8px;margin-bottom:8px;"><div class="ic icgold">🔑</div><div style="font-weight:700;font-size:16px;">Key person dependency</div></div>
+        <div class="body" style="font-size:14px;line-height:1.65;">If your SCHADS expert leaves, your payroll compliance walks out with them. One resignation = instant exposure across every node in that diagram.</div>
+      </div>
+      <div class="card card-red">
+        <div class="row" style="gap:8px;margin-bottom:8px;"><div class="ic icr">📰</div><div style="font-weight:700;font-size:16px;">Real-world consequence</div></div>
+        <div class="body" style="font-size:14px;line-height:1.65;">Uniting Communities (65 sites, SA) — self-reported SCHADS underpayments spanning <strong>10 years</strong> and <strong>1,500 employees</strong>. Enforceable undertaking: <strong>$2.6M repaid</strong>.</div>
+        <a class="news-chip red" style="margin-top:4px;" href="https://hallandwilcox.com.au/news/fair-work-ombudsman-pursues-providers-over-alleged-wage-shortfalls/" target="_blank">Hall &amp; Wilcox — Case Report</a>
+      </div>
+      <div class="card" style="background:rgba(165,105,255,0.04);border-color:rgba(165,105,255,0.2);">
+        <div style="font-size:14px;color:var(--text);line-height:1.65;"><strong>With Employment Hero:</strong> every node in that diagram is handled automatically. Rates update on schedule. Classifications are validated. You never carry this.</div>
+        <a class="news-chip" style="margin-top:6px;" href="https://www.fairwork.gov.au/find-help-for/disability-support-and-aged-care-services/understanding-schads/working-in-the-schads-sector" target="_blank">Fair Work — SCHADS Overview</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S9 ERRORS -->
+<div class="slide" id="s9">
+  <div class="eyebrow">Pillar 3 · Labour Cost</div>
+  <div class="h1">Errors — <span>Silent, Compounding, Both Ways</span></div>
+  <div class="sub">One small mistake. Repeated across 50 staff. For 18 months. Here's what that actually costs.</div>
+  <div style="flex:1;display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start;">
+
+    <!-- LEFT: animated compounding chart -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;height:100%;display:flex;flex-direction:column;">
+      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:14px;">Error compounding — $8/shift underpayment, 50 staff</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:0;min-height:0;">
+        <div id="errorBars" style="display:flex;align-items:flex-end;gap:5px;flex:1;min-height:0;padding-bottom:4px;">
+          <!-- Bars rendered by JS -->
+        </div>
+        <div style="display:flex;gap:5px;padding-top:4px;border-top:1px solid var(--border-soft);">
+          <div id="errorLabels" style="display:flex;gap:5px;width:100%;"></div>
+        </div>
+      </div>
+      <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;">
+        <div style="padding:8px;background:rgba(220,38,38,0.05);border-radius:8px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--red);">36%</div>
+          <div style="font-size:9.5px;color:var(--muted);margin-top:2px;">of audited providers getting penalty rates wrong</div>
+        </div>
+        <div style="padding:8px;background:rgba(217,119,6,0.05);border-radius:8px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--gold);">$10,400</div>
+          <div style="font-size:9.5px;color:var(--muted);margin-top:2px;">back-pay from $8/shift × 50 staff × 26 runs</div>
+        </div>
+        <div style="padding:8px;background:rgba(220,38,38,0.05);border-radius:8px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:20px;font-weight:800;color:var(--red);">21×</div>
+          <div style="font-size:9.5px;color:var(--muted);margin-top:2px;">penalty multiplier seen in FWO court cases</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: error types + case -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card card-red" style="display:flex;flex-direction:column;">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">⬇️ Underpayments — now criminal if intentional</div>
+        <div class="body">Broken shifts, sleepovers, and weekend penalty rates are the most commonly missed. Often because a payroll rule was set once and never updated after award changes.</div>
+        <div class="case-block" style="margin-top:8px;">
+          <div class="case-icon">📰</div>
+          <div>
+            <div class="case-title">Agape Disability Services — FWO 2024</div>
+            <div class="case-body">Travel allowances + minimum hourly rate underpayment under SCHADS → FWO Compliance Notice issued. Small underpayment, serious regulatory action.</div>
+            <a class="news-chip red" style="margin-top:4px;" href="https://hallandwilcox.com.au/news/fair-work-ombudsman-pursues-providers-over-alleged-wage-shortfalls/" target="_blank">Read the case</a>
+          </div>
+        </div>
+      </div>
+      <div class="card card-gold">
+        <div style="font-size:12px;font-weight:700;margin-bottom:6px;">⬆️ Overpayments — silent margin erosion</div>
+        <div class="body">Incorrect classifications and unnecessary allowances drain margin every fortnight — without a line item on your P&amp;L. Most providers never find these until an audit.</div>
+      </div>
+      <div class="case-block">
+        <div class="case-icon">⚖️</div>
+        <div>
+          <div class="case-title">Sushi Bay v FWO [2024] FCA 869</div>
+          <div class="case-body">$650K underpayment. $13.7M in civil penalties. Penalties apply per contravention — not per total shortfall.</div>
+          <a class="news-chip" style="margin-top:4px;" href="https://www.astrislaw.com/article/fair-work-underpayments-and-penalties" target="_blank">Read penalty breakdown</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S10 COMPLIANCE -->
+<div class="slide" id="s10">
+  <div class="eyebrow">Pillar 4 · Compliance Risk</div>
+  <div class="h1">What Happens When Something Goes Wrong</div>
+  <div class="sub">Manual SCHADS payroll isn't just inefficient — it's a risk ladder. Every rung is a real consequence FWO providers have faced.</div>
+
+  <div style="flex:1;display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:center;">
+
+    <!-- LEFT: escalation ladder -->
+    <div style="display:flex;flex-direction:column;gap:0;position:relative;">
+      <!-- Vertical spine -->
+      <div style="position:absolute;left:20px;top:16px;bottom:16px;width:2px;background:linear-gradient(180deg,rgba(5,150,105,0.3),rgba(217,119,6,0.5),rgba(220,38,38,0.7),rgba(220,38,38,1));border-radius:2px;"></div>
+
+      <!-- Rung 1 -->
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:0 0 12px 0;">
+        <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(5,150,105,0.1);border:2px solid rgba(5,150,105,0.4);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">🔍</div>
+        <div style="flex:1;padding:10px 14px;background:rgba(5,150,105,0.05);border:1px solid rgba(5,150,105,0.18);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--green);margin-bottom:3px;">Stage 1 — Employee complaint or self-audit reveals error</div>
+          <div style="font-size:11px;color:var(--muted);">A broken shift, travel allowance, or penalty rate has been miscalculated. Could be one employee — or 200.</div>
+        </div>
+      </div>
+
+      <!-- Rung 2 -->
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:0 0 12px 0;">
+        <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(217,119,6,0.1);border:2px solid rgba(217,119,6,0.4);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">📋</div>
+        <div style="flex:1;padding:10px 14px;background:rgba(217,119,6,0.05);border:1px solid rgba(217,119,6,0.18);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--gold);margin-bottom:3px;">Stage 2 — FWO issues a Compliance Notice</div>
+          <div style="font-size:11px;color:var(--muted);">Even a $7,800 underpayment (like Agape, 2024) triggers formal notice. You must calculate and repay — under FWO supervision.</div>
+        </div>
+      </div>
+
+      <!-- Rung 3 -->
+      <div style="display:flex;gap:14px;align-items:flex-start;padding:0 0 12px 0;">
+        <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(220,38,38,0.1);border:2px solid rgba(220,38,38,0.4);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">⚖️</div>
+        <div style="flex:1;padding:10px 14px;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.18);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;">Stage 3 — Civil penalty proceedings</div>
+          <div style="font-size:11px;color:var(--muted);">Penalties up to <strong style="color:var(--text);">3× the underpayment</strong> — or $7.8M per offence for a company. Sushi Bay: $650K shortfall → $13.7M penalty.</div>
+          <a class="news-chip red" style="margin-top:5px;" href="https://www.astrislaw.com/article/fair-work-underpayments-and-penalties" target="_blank">Astris Law — Penalty Breakdown</a>
+        </div>
+      </div>
+
+      <!-- Rung 4 -->
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(220,38,38,0.15);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">🚨</div>
+        <div style="flex:1;padding:10px 14px;background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.3);border-radius:10px;">
+          <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;">Stage 4 — Criminal prosecution (from Jan 2025)</div>
+          <div style="font-size:11px;color:var(--muted);">Intentional or reckless underpayment = criminal offence. Up to <strong style="color:var(--text);">10 years imprisonment</strong> for individuals. Directors personally liable under s550.</div>
+          <a class="news-chip red" style="margin-top:5px;" href="https://www.kwm.com/au/en/insights/latest-thinking/wage-theft-laws-are-now-in-force-the-fwo-releases-guidance-on-how-to-comply-and-updates-its-enforcement-approach.html" target="_blank">KWM — Criminal Wage Theft Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: sector stats + EH escape -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:var(--shadow);">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--red);">$68M</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;">back-paid in the disability sector 2020–2024</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:var(--shadow);">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--gold);">75,000+</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;">FWO enquiries in the sector in 4 years</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:var(--shadow);">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:28px;font-weight:800;color:var(--red);">36%</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;">of audited providers were underpaying penalty rates</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:var(--shadow);">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--purple);">Multi-year</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;line-height:1.4;">FWO sector inquiry launched July 2025 — enforcement follows</div>
+        </div>
+      </div>
+      <div style="padding:14px 16px;background:linear-gradient(135deg,rgba(165,105,255,0.07),rgba(5,150,105,0.04));border:1px solid rgba(165,105,255,0.2);border-radius:12px;">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Employment Hero helps keep you off this ladder</div>
+        <div style="font-size:11.5px;color:var(--muted);line-height:1.55;">Award interpretation is built in and auto-updates. Classifications are validated. Every entitlement is calculated correctly — before it ever reaches an employee's payslip.</div>
+      </div>
+      <a class="news-chip gold" href="https://www.abilitynews.org/p/fair-work-probes-disability-sector-bbdc109b0a08c4fc" target="_blank">Ability News — FWO Sector Inquiry</a>
+    </div>
+  </div>
+</div>
+
+<!-- S11 PROFITABILITY -->
+<div class="slide" id="s11">
+  <div class="eyebrow">Pillar 5 · Visibility</div>
+  <div class="h1">Profitability Intelligence — <span>Know Your True Cost of Care</span></div>
+  <div class="sub">Stop managing your business from a single P&amp;L line. Start seeing what's actually happening.</div>
+  <div style="flex:1;display:grid;grid-template-columns:1.4fr 1fr;gap:16px;align-items:stretch;">
+
+    <!-- LEFT: mock EH dashboard -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;">
+      <!-- Mock toolbar -->
+      <div style="background:var(--s2);border-bottom:1px solid var(--border-soft);padding:8px 14px;display:flex;align-items:center;gap:8px;">
+        <div style="font-size:12px;font-weight:700;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;">EH Dimensions · Labour Cost by Client</div>
+        <div style="margin-left:auto;font-size:10px;padding:2px 8px;background:rgba(5,150,105,0.1);color:var(--green);border-radius:100px;font-weight:700;">LIVE VIEW</div>
+      </div>
+      <!-- Bar chart rows -->
+      <div style="padding:14px 16px;flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:6px;">
+        <!-- Client rows -->
+        <div id="dash-rows" style="display:flex;flex-direction:column;gap:7px;flex:1;justify-content:center;"></div>
+      </div>
+      <!-- Footer note -->
+      <div style="padding:8px 14px;border-top:1px solid var(--border-soft);font-size:9.5px;color:var(--muted);font-style:italic;">Data shown is illustrative. Your actual participant costs displayed in real time.</div>
+    </div>
+
+    <!-- RIGHT: what this means -->
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="padding:14px;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.15);border-radius:var(--r);">
+        <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px;">Without this view</div>
+        <div class="body" style="font-size:14px;line-height:1.65;">Every client looks the same on a P&amp;L. You only know if you're profitable <em>overall</em> — not which participants are draining your margin or why.</div>
+      </div>
+      <div style="padding:14px;background:rgba(5,150,105,0.05);border:1px solid rgba(5,150,105,0.15);border-radius:var(--r);">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px;">With EH Dimensions &amp; Locations</div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <div class="ci"><span class="ci-i" style="color:var(--green);">✓</span><div>True labour cost per NDIS participant</div></div>
+          <div class="ci"><span class="ci-i" style="color:var(--green);">✓</span><div>Cost by shift type — sleepovers, weekends, community</div></div>
+          <div class="ci"><span class="ci-i" style="color:var(--green);">✓</span><div>Profitability by facility or location</div></div>
+          <div class="ci"><span class="ci-i" style="color:var(--green);">✓</span><div>Flag when to request a plan review with NDIA</div></div>
+          <div class="ci"><span class="ci-i" style="color:var(--green);">✓</span><div>Decide which services to grow vs pull back</div></div>
+        </div>
+      </div>
+      <div style="padding:10px 14px;background:var(--s2);border-radius:10px;font-size:11.5px;color:var(--muted);font-weight:500;">
+        <strong style="color:var(--text);">The providers winning in the NDIS environment</strong> are the ones who know their true cost of care per participant — and price and staff accordingly.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 INTEGRATION -->
+<div class="slide" id="s12" style="background:linear-gradient(180deg,var(--sc-periwinkle) 0%,var(--bg) 35%);">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(213,223,245,0.4) 0%,transparent 40%);pointer-events:none;z-index:0;border-radius:0;"></div>
+  <div class="eyebrow" style="position:relative;z-index:1;">The ShiftCare Integration</div>
+  <div class="h1" style="position:relative;z-index:1;">One setup. <span>Fully automated, every fortnight.</span></div>
+  <div class="sub" style="position:relative;z-index:1;">You're already paying for ShiftCare. You're leaving half its value on the table without EH.</div>
+
+  <div style="flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:stretch;">
+
+    <!-- LEFT: Pipeline visual -->
+    <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);padding:22px 24px;display:flex;flex-direction:column;justify-content:center;gap:0;">
+
+      <!-- Step 1 -->
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(165,105,255,0.15),rgba(165,105,255,0.08));border:1.5px solid rgba(165,105,255,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:1;">👤</div>
+          <div style="width:2px;flex:1;min-height:20px;background:linear-gradient(180deg,rgba(165,105,255,0.3),rgba(81,117,209,0.3));margin-top:4px;"></div>
+        </div>
+        <div style="padding-bottom:20px;flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;">Employee onboarded in EH</div>
+            <div style="font-size:9px;font-weight:700;color:var(--purple);background:rgba(165,105,255,0.1);padding:1px 7px;border-radius:100px;white-space:nowrap;">Step 1 · Once only</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Qualifications, pay rates, and SCHADS classifications set once — flows automatically to ShiftCare. No double-entry ever.</div>
+          <div style="margin-top:7px;display:flex;gap:6px;flex-wrap:wrap;">
+            <span style="font-size:9.5px;background:var(--s2);color:var(--muted);padding:2px 8px;border-radius:100px;">Classifications</span>
+            <span style="font-size:9.5px;background:var(--s2);color:var(--muted);padding:2px 8px;border-radius:100px;">Pay rates</span>
+            <span style="font-size:9.5px;background:var(--s2);color:var(--muted);padding:2px 8px;border-radius:100px;">Qualifications</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(81,117,209,0.15),rgba(81,117,209,0.08));border:1.5px solid rgba(81,117,209,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:1;">📅</div>
+          <div style="width:2px;flex:1;min-height:20px;background:linear-gradient(180deg,rgba(81,117,209,0.3),rgba(217,119,6,0.3));margin-top:4px;"></div>
+        </div>
+        <div style="padding-bottom:20px;flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;">Shifts rostered in ShiftCare</div>
+            <div style="font-size:9px;font-weight:700;color:var(--teal);background:rgba(81,117,209,0.1);padding:1px 7px;border-radius:100px;white-space:nowrap;">Step 2 · Your team</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Client management, rostering, and timesheet capture — nothing changes here. Your coordinators keep working exactly as they do today.</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(217,119,6,0.15),rgba(217,119,6,0.08));border:1.5px solid rgba(217,119,6,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:1;">🔄</div>
+          <div style="width:2px;flex:1;min-height:20px;background:linear-gradient(180deg,rgba(217,119,6,0.3),rgba(5,150,105,0.4));margin-top:4px;"></div>
+        </div>
+        <div style="padding-bottom:20px;flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;">Timesheets flow to EH</div>
+            <div style="font-size:9px;font-weight:700;color:var(--gold);background:rgba(217,119,6,0.1);padding:1px 7px;border-radius:100px;white-space:nowrap;">Automatic</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">No manual re-entry. No CSV exports. No copy-paste sessions. Every approved shift transfers directly — zero touch.</div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="display:flex;gap:16px;align-items:flex-start;">
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:44px;">
+          <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(5,150,105,0.15),rgba(5,150,105,0.08));border:1.5px solid rgba(5,150,105,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;z-index:1;">✅</div>
+        </div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;">SCHADS applied. Pay run done.</div>
+            <div style="font-size:9px;font-weight:700;color:var(--green);background:rgba(5,150,105,0.1);padding:1px 7px;border-radius:100px;white-space:nowrap;">1–2 hrs total</div>
+          </div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.5;">Award applied automatically. Dimensions & locations exported for profitability intelligence. STP submitted. Done.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: before/after + time saving -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <!-- Time saving visual -->
+      <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">Time per pay run — before vs after</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="font-size:10px;color:var(--red);font-weight:700;width:80px;text-align:right;flex-shrink:0;">Without EH</div>
+          <div style="flex:1;height:28px;background:rgba(220,38,38,0.1);border-radius:6px;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(220,38,38,0.5),rgba(220,38,38,0.35));border-radius:6px;width:100%;"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--red);">12–16 hours</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="font-size:10px;color:var(--green);font-weight:700;width:80px;text-align:right;flex-shrink:0;">With EH</div>
+          <div style="flex:1;height:28px;background:rgba(5,150,105,0.08);border-radius:6px;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,150,105,0.45),rgba(5,150,105,0.3));border-radius:6px;width:14%;"></div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--green);">1–2 hours</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- What gets eliminated -->
+      <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 18px;flex:1;">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Steps eliminated by the integration</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(220,38,38,0.04);border-radius:8px;border:1px solid rgba(220,38,38,0.1);">
+            <span style="color:var(--red);font-size:12px;flex-shrink:0;">✗</span>
+            <span style="font-size:11.5px;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(220,38,38,0.4);">Export timesheets from ShiftCare to CSV</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(220,38,38,0.04);border-radius:8px;border:1px solid rgba(220,38,38,0.1);">
+            <span style="color:var(--red);font-size:12px;flex-shrink:0;">✗</span>
+            <span style="font-size:11.5px;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(220,38,38,0.4);">Manually check SCHADS for each shift type</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(220,38,38,0.04);border-radius:8px;border:1px solid rgba(220,38,38,0.1);">
+            <span style="color:var(--red);font-size:12px;flex-shrink:0;">✗</span>
+            <span style="font-size:11.5px;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(220,38,38,0.4);">Re-enter hours into your payroll system</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(220,38,38,0.04);border-radius:8px;border:1px solid rgba(220,38,38,0.1);">
+            <span style="color:var(--red);font-size:12px;flex-shrink:0;">✗</span>
+            <span style="font-size:11.5px;color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(220,38,38,0.4);">Chase approvals, find and fix errors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom callout -->
+      <div style="padding:12px 16px;background:linear-gradient(135deg,rgba(165,105,255,0.07),rgba(81,117,209,0.05));border:1px solid rgba(165,105,255,0.2);border-radius:12px;font-size:12px;font-weight:600;color:var(--text);text-align:center;">
+        ShiftCare integration is included at <span style="color:var(--purple);">$10/emp/month</span>. No add-ons. No CSV. No rework.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S13 XERO OBJECTION -->
+<div class="slide" id="s13">
+  <div class="eyebrow">Common Objection</div>
+  <div class="h1">"But we're already <span>paying for payroll…"</span></div>
+  <div class="sub">Your accounting software has a payroll component. But generic payroll ≠ NDIS payroll. Here's what's actually different.</div>
+
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;">
+
+    <!-- Matrix header -->
+    <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:0;border-radius:12px 12px 0 0;overflow:hidden;border:1px solid var(--border-soft);border-bottom:none;">
+      <div style="padding:10px 16px;background:var(--s2);border-right:1px solid var(--border-soft);">
+        <div style="font-size:9.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);">Capability</div>
+      </div>
+      <div style="padding:10px 16px;background:rgba(220,38,38,0.05);border-right:1px solid var(--border-soft);text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:var(--red);">Payroll Add-on</div>
+        <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">Generic accounting platform</div>
+      </div>
+      <div style="padding:10px 16px;background:rgba(165,105,255,0.05);text-align:center;">
+        <div style="font-size:11px;font-weight:700;color:var(--purple);">EH Payroll</div>
+        <div style="font-size:9.5px;color:var(--muted);margin-top:1px;">Built for care sector</div>
+      </div>
+    </div>
+
+    <!-- Matrix rows -->
+    <div style="border:1px solid var(--border-soft);border-radius:0 0 12px 12px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);">
+
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:14px;">⚖️</span>
+          <div><div style="font-size:12px;font-weight:600;">SCHADS award interpretation</div><div style="font-size:10.5px;color:var(--muted);">Broken shifts, sleepovers, ERO loadings, travel allowances</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-soft);background:rgba(220,38,38,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✗</div><div style="font-size:9.5px;color:var(--red);font-weight:600;margin-top:2px;">Manual. On you.</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✓</div><div style="font-size:9.5px;color:var(--green);font-weight:600;margin-top:2px;">Automatic. Built in.</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:14px;">🔗</span>
+          <div><div style="font-size:12px;font-weight:600;">Native ShiftCare integration</div><div style="font-size:10.5px;color:var(--muted);">Timesheet sync, roster data, no CSV exports</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-soft);background:rgba(220,38,38,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✗</div><div style="font-size:9.5px;color:var(--red);font-weight:600;margin-top:2px;">Manual re-entry</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✓</div><div style="font-size:9.5px;color:var(--green);font-weight:600;margin-top:2px;">Fully automated</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:14px;">📊</span>
+          <div><div style="font-size:12px;font-weight:600;">Labour cost by client, location &amp; shift type</div><div style="font-size:10.5px;color:var(--muted);">Dimensions &amp; locations reporting for profitability</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-soft);background:rgba(220,38,38,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✗</div><div style="font-size:9.5px;color:var(--red);font-weight:600;margin-top:2px;">Not available</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✓</div><div style="font-size:9.5px;color:var(--green);font-weight:600;margin-top:2px;">Core feature</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:14px;">🔄</span>
+          <div><div style="font-size:12px;font-weight:600;">Award rates auto-update (Jul &amp; Oct)</div><div style="font-size:10.5px;color:var(--muted);">3.5% July 2025 + aged care Oct 2025 wave</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-soft);background:rgba(220,38,38,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✗</div><div style="font-size:9.5px;color:var(--red);font-weight:600;margin-top:2px;">Your responsibility</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.02);">
+          <div style="text-align:center;"><div style="font-size:16px;">✓</div><div style="font-size:9.5px;color:var(--green);font-weight:600;margin-top:2px;">Auto-updated</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.8fr 1fr 1fr;">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:8px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:14px;">💳</span>
+          <div><div style="font-size:12px;font-weight:600;">What you're actually paying</div><div style="font-size:10.5px;color:var(--muted);">Bundled cost vs standalone payroll</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--border-soft);background:rgba(217,119,6,0.03);">
+          <div style="text-align:center;"><div style="font-size:10px;color:var(--gold);font-weight:700;">⚠ Bundled since Jun 2025</div><div style="font-size:9.5px;color:var(--muted);margin-top:2px;">Can't turn it off</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(165,105,255,0.02);">
+          <div style="text-align:center;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:800;color:var(--purple);">$10/emp/mo</div><div style="font-size:9.5px;color:var(--muted);margin-top:2px;">Transparent. Standalone.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:10px 16px;background:linear-gradient(135deg,rgba(165,105,255,0.06),rgba(81,117,209,0.04));border:1px solid rgba(165,105,255,0.18);border-radius:10px;font-size:12px;font-weight:600;color:var(--text);text-align:center;">
+      You don't have to stop using your accounting software. You just need a payroll layer that actually understands your workforce.
+    </div>
+  </div>
+</div>
+
+<!-- S14 PRICING -->
+<div class="slide" id="s14">
+  <div class="eyebrow">Pricing &amp; Compatibility</div>
+  <div class="h1">Simple pricing. <span>Immediate ROI.</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;">
+
+    <!-- LEFT: pricing visual + tiers -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <!-- Hero price card -->
+      <div style="background:var(--surface);border:2px solid var(--purple);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;right:0;background:var(--purple);color:white;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px 4px 16px;border-radius:0 var(--r) 0 12px;">Start here</div>
+        <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:8px;">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:52px;font-weight:800;color:var(--purple);line-height:1;">$10</div>
+          <div style="padding-bottom:8px;font-size:12px;color:var(--muted);">/employee/month</div>
+        </div>
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px;">Payroll Only — Everything included</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:12px;">Full SCHADS interpretation + ShiftCare native integration. 10 licence minimum.</div>
+        <!-- Example calc -->
+        <div style="background:rgba(165,105,255,0.08);border-radius:10px;padding:10px 14px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+            <span style="font-size:11px;color:var(--muted);">50 staff</span>
+            <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800;color:var(--purple);">$500/month</span>
+          </div>
+          <div style="height:1px;background:rgba(165,105,255,0.15);margin:6px 0;"></div>
+          <div style="font-size:10.5px;color:var(--purple);font-weight:600;">Less than the admin time you're already spending on payroll</div>
+        </div>
+      </div>
+
+      <!-- Upgrade path -->
+      <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:10px;">Scale when you're ready</div>
+        <div style="display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--s2);border-radius:8px;">
+            <span style="font-size:11.5px;font-weight:600;">HR Essentials</span>
+            <span style="font-size:11px;color:var(--muted);">$10/emp/mo</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--s2);border-radius:8px;">
+            <span style="font-size:11.5px;font-weight:600;">HR Engage</span>
+            <span style="font-size:11px;color:var(--muted);">$14/emp/mo</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--s2);border-radius:8px;">
+            <span style="font-size:11.5px;font-weight:600;">HR Elite</span>
+            <span style="font-size:11px;color:var(--muted);">$18/emp/mo</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:rgba(165,105,255,0.06);border:1px solid rgba(165,105,255,0.15);border-radius:8px;">
+            <span style="font-size:11.5px;font-weight:700;color:var(--purple);">Employment OS Unlimited</span>
+            <span style="font-size:11px;color:var(--purple);font-weight:700;">$50/emp/mo</span>
+          </div>
+        </div>
+        <div style="margin-top:8px;font-size:10.5px;color:var(--muted);">ShiftCare integration available on Payroll and Elite tiers.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: what's included + ROI summary -->
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <!-- What's included -->
+      <div style="background:var(--surface);border:1px solid var(--border-soft);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);flex:1;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:12px;">Everything in Payroll Only</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:rgba(5,150,105,0.04);border-radius:8px;">
+            <span style="color:var(--green);font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px;">✓</span>
+            <div><div style="font-size:12px;font-weight:700;">Full SCHADS award interpretation</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">Broken shifts, sleepovers, ERO loadings — automatic</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:rgba(5,150,105,0.04);border-radius:8px;">
+            <span style="color:var(--green);font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px;">✓</span>
+            <div><div style="font-size:12px;font-weight:700;">Native ShiftCare integration</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">Timesheets sync automatically — zero re-entry</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:rgba(5,150,105,0.04);border-radius:8px;">
+            <span style="color:var(--green);font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px;">✓</span>
+            <div><div style="font-size:12px;font-weight:700;">STP &amp; ATO compliance built in</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">Single Touch Payroll filed automatically each run</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:rgba(5,150,105,0.04);border-radius:8px;">
+            <span style="color:var(--green);font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px;">✓</span>
+            <div><div style="font-size:12px;font-weight:700;">Dimensions &amp; locations reporting</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">True cost per client, shift type, and facility</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:rgba(5,150,105,0.04);border-radius:8px;">
+            <span style="color:var(--green);font-weight:800;font-size:13px;flex-shrink:0;margin-top:1px;">✓</span>
+            <div><div style="font-size:12px;font-weight:700;">Onboarding support included</div><div style="font-size:10.5px;color:var(--muted);margin-top:2px;">Most providers live within weeks, not months</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick ROI math -->
+      <div style="background:linear-gradient(135deg,rgba(5,150,105,0.08),rgba(165,105,255,0.05));border:1px solid rgba(5,150,105,0.2);border-radius:var(--r);padding:14px 18px;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;">The maths for 50 staff</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--muted);margin-bottom:4px;"><span>Admin labour saving (est.)</span><span style="font-weight:700;color:var(--text);">$1,200/month</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--muted);margin-bottom:8px;"><span>EH Payroll cost</span><span style="font-weight:700;color:var(--red);">−$500/month</span></div>
+        <div style="height:1px;background:rgba(5,150,105,0.2);margin-bottom:8px;"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:12px;font-weight:700;">Net monthly saving</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800;color:var(--green);">~$700+</span>
+        </div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">Before compliance benefit and error risk reduction.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S15 FULL PICTURE -->
+<div class="slide" id="s15">
+  <div class="eyebrow">The Full Picture</div>
+  <div class="h1">Cost. Risk. Visibility. <span>Here's how it stacks up.</span></div>
+
+  <div style="flex:1;display:flex;flex-direction:column;gap:10px;min-height:0;">
+
+    <!-- Column headers -->
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:0;">
+      <div></div>
+      <div style="padding:10px 16px;background:rgba(220,38,38,0.07);border-radius:10px 0 0 0;border:1px solid rgba(220,38,38,0.2);border-right:none;text-align:center;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:2px;">Current State</div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);">Accounting platform + manual SCHADS</div>
+      </div>
+      <div style="padding:10px 16px;background:rgba(165,105,255,0.08);border-radius:0 10px 0 0;border:1px solid rgba(165,105,255,0.25);border-left:none;text-align:center;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--purple);margin-bottom:2px;">With EH Payroll</div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);">EH + ShiftCare, SCHADS built in</div>
+      </div>
+    </div>
+
+    <!-- Comparison rows -->
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column;border-radius:0 0 12px 12px;overflow:hidden;border:1px solid var(--border-soft);background:var(--surface);box-shadow:var(--shadow);">
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">💸</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">Admin labour</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">~$1,400/mo</div><div style="font-size:11px;color:var(--muted);">hidden in salaries</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">~$200/mo</div><div style="font-size:11px;color:var(--muted);">1–2 hrs per run</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">📋</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">SCHADS expertise</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">Key-person risk</div><div style="font-size:11px;color:var(--muted);">carried internally</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">Built in</div><div style="font-size:11px;color:var(--muted);">zero key-person risk</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">⚠️</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">Error risk</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">High</div><div style="font-size:11px;color:var(--muted);">36% get penalty rates wrong</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">Low</div><div style="font-size:11px;color:var(--muted);">automated classification & rules</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">⚖️</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">Compliance exposure</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">Criminal + civil</div><div style="font-size:11px;color:var(--muted);">liability on the table</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">Significantly reduced</div><div style="font-size:11px;color:var(--muted);">rates auto-update</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;border-bottom:1px solid var(--border-soft);">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">📊</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">Profitability intel</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">None</div><div style="font-size:11px;color:var(--muted);">flying blind on margins</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">Full dimensions</div><div style="font-size:11px;color:var(--muted);">per client, per shift type</div></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;flex:1;">
+        <div style="padding:10px 16px;display:flex;align-items:center;gap:10px;border-right:1px solid var(--border-soft);">
+          <span style="font-size:18px;flex-shrink:0;">🔗</span>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">ShiftCare sync</div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(220,38,38,0.03);border-right:1px solid var(--border-soft);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--red);">Manual re-entry</div><div style="font-size:11px;color:var(--muted);">every fortnight</div></div>
+        </div>
+        <div style="padding:10px 16px;display:flex;align-items:center;justify-content:center;background:rgba(5,150,105,0.03);">
+          <div style="text-align:center;"><div style="font-size:13px;font-weight:700;color:var(--green);">Fully automated</div><div style="font-size:11px;color:var(--muted);">zero manual re-entry</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom stat bar -->
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:10px;">
+      <div></div>
+      <div style="padding:12px 16px;background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);border-radius:10px;text-align:center;">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">Total monthly cost (50 staff)</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--red);">~$1,900/mo</div>
+        <div style="font-size:10px;color:var(--muted);">Software + labour + risk exposure</div>
+      </div>
+      <div style="padding:12px 16px;background:rgba(165,105,255,0.06);border:2px solid var(--purple);border-radius:10px;text-align:center;">
+        <div style="font-size:10px;color:var(--muted);margin-bottom:2px;">Total monthly cost (50 staff)</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:26px;font-weight:800;color:var(--purple);">$700/mo</div>
+        <div style="font-size:10px;color:var(--muted);">$500 EH + ~$200 admin. Compliance included.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- S16 QA -->
+<div class="slide" id="s16">
+  <div class="eyebrow">Common Questions</div>
+  <div class="h1">Heard it all. <span>Here are the real answers.</span></div>
+  <div class="qa-grid">
+    <div class="qa"><div class="qq">Q</div><div><div class="qn">"We're too small"</div><div class="qa-a">The maths works from 10 staff. Compliance risk doesn't scale down just because you do — a $7.8K underpayment still attracts the same FWO action.</div></div></div>
+    <div class="qa"><div class="qq">Q</div><div><div class="qn">"Switching sounds painful"</div><div class="qa-a">Onboarding support is included. Most providers are live within a few weeks — not months. The pain of switching is far less than the pain of an FWO investigation.</div></div></div>
+    <div class="qa"><div class="qq">Q</div><div><div class="qn">"Our bookkeeper handles it"</div><div class="qa-a">Are they a SCHADS expert? What happens to your payroll process when they leave? One resignation = instant exposure under the new criminal regime.</div></div></div>
+    <div class="qa"><div class="qq">Q</div><div><div class="qn">"We haven't had a problem yet"</div><div class="qa-a">36% of audited providers didn't know they had one either — until the FWO arrived. Uniting Communities ran SCHADS underpayments for <em>ten years</em> before self-reporting.</div></div></div>
+    <div class="qa"><div class="qq">Q</div><div><div class="qn">"We don't need the reporting"</div><div class="qa-a">You don't know what you're missing until you can see your true cost per client and location. Many providers find unprofitable participants they're actively subsidising.</div></div></div>
+    <div class="qa" style="background:rgba(165,105,255,0.04);border-color:rgba(165,105,255,0.2);"><div class="qq" style="opacity:1;">✦</div><div><div class="qn" style="color:var(--purple);">Still have questions?</div><div class="qa-a">Book a free 20-minute payroll cost review — we'll run your actual numbers live with your team.</div></div></div>
+  </div>
+</div>
+
+<!-- S17 NEXT STEPS -->
+<div class="slide" id="s17">
+  <div class="c">
+    <div style="display:inline-flex;align-items:center;gap:10px;font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:18px;"><span style="display:inline-block;width:22px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.7),rgba(255,255,255,0.3));border-radius:2px;flex-shrink:0;"></span>One clear next step</div>
+    <h2>Book a Free 20-Minute<br>Payroll Cost Review</h2>
+    <div class="cs">Labour is your biggest cost. Compliance is your biggest risk. Visibility is your biggest advantage. We'll show you exactly where you stand on all three — with your actual numbers, live.</div>
+    <div class="dlvr">
+      <div class="dlv"><div class="dlv-i">🧮</div>Your actual payroll cost calculated live</div>
+      <div class="dlv"><div class="dlv-i">⚖️</div>Compliance risk assessment for your business</div>
+      <div class="dlv"><div class="dlv-i">🔗</div>Live demo of ShiftCare → EH integration</div>
+    </div>
+    <button class="cta">Book your free review →</button>
+    <div style="margin-top:22px;font-size:10px;color:rgba(255,255,255,0.28);letter-spacing:0.05em;">Employment Hero × ShiftCare &nbsp;·&nbsp; Referral & Integration Partnership &nbsp;·&nbsp; $10/emp/month</div>
+  </div>
+</div>
+
+</div><!-- /slides-wrap -->
+
+<div class="nav-arrows">
+  <button class="nav-btn" id="prevBtn" onclick="nav(-1)" disabled>‹</button>
+  <button class="nav-btn" id="nextBtn" onclick="nav(1)">›</button>
+</div>
+
+<script>
+  const N=17; let cur=1;
+  function goTo(n){
+    if(n<1||n>N)return;
+    document.getElementById('s'+cur).classList.remove('active');
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    cur=n;
+    document.getElementById('s'+cur).classList.add('active');
+    document.querySelector('.tab[data-s="'+cur+'"]').classList.add('active');
+    document.getElementById('pFill').style.width=((cur/N)*100)+'%';
+    document.getElementById('prevBtn').disabled=cur===1;
+    document.getElementById('nextBtn').disabled=cur===N;
+    document.querySelector('.tab.active').scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+  }
+  function nav(d){goTo(cur+d);}
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')goTo(cur+1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')goTo(cur-1);
+  });
+
+  function toggleTheme(){
+    const h=document.documentElement;
+    const tr=document.getElementById('tTrack');
+    const lb=document.getElementById('tLabel');
+    const d=h.classList.toggle('dark');
+    tr.classList.toggle('on',d);
+    lb.textContent=d?'☀️':'🌙';
+    // Sync dark class to S7 roi-embed div
+    const roi=document.getElementById('roiEmbed');
+    if(roi) roi.classList.toggle('dark',d);
+  }
+
+  // ── Error compounding bar chart (S9) ──
+  function buildErrorBars() {
+    const container = document.getElementById('errorBars');
+    const labelContainer = document.getElementById('errorLabels');
+    if (!container || !labelContainer) return;
+    const runs = [1,2,3,4,5,6,7,8,9,10,11,12,13];
+    const liability = runs.map(r => r * 50 * 8);
+    const maxVal = liability[liability.length - 1];
+    container.innerHTML = '';
+    labelContainer.innerHTML = '';
+    runs.forEach((r, i) => {
+      const pct = (liability[i] / maxVal) * 100;
+      const isLast = i === runs.length - 1;
+      const alpha = 0.2 + i * 0.06;
+      const bar = document.createElement('div');
+      bar.style.cssText = `flex:1;border-radius:4px 4px 0 0;background:${isLast ? 'var(--red)' : 'rgba(220,38,38,'+alpha+')'};height:0;transition:height 0.6s cubic-bezier(0.4,0,0.2,1) ${i*0.045}s;position:relative;`;
+      if (isLast) {
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:700;color:var(--red);white-space:nowrap;';
+        lbl.textContent = '$'+liability[i].toLocaleString();
+        bar.appendChild(lbl);
+      }
+      container.appendChild(bar);
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'flex:1;text-align:center;font-size:8px;color:var(--muted);';
+      lbl.textContent = 'F'+r;
+      labelContainer.appendChild(lbl);
+      setTimeout(() => { bar.style.height = pct + '%'; }, 120);
+    });
+  }
+
+  // ── Profitability mock dashboard (S11) ──
+  function buildDashboard() {
+    const container = document.getElementById('dash-rows');
+    if (!container) return;
+    const clients = [
+      { name: 'Client A — SIL Weekend', cost: 94, ndis: 98, profit: true },
+      { name: 'Client B — Community Access', cost: 71, ndis: 74, profit: true },
+      { name: 'Client C — Sleepover SDA', cost: 112, ndis: 108, profit: false },
+      { name: 'Client D — Day Program', cost: 58, ndis: 62, profit: true },
+      { name: 'Client E — In-Home Support', cost: 88, ndis: 82, profit: false },
+    ];
+    const maxVal = Math.max(...clients.map(c => Math.max(c.cost, c.ndis)));
+    container.innerHTML = clients.map(c => {
+      const costPct = (c.cost / maxVal) * 100;
+      const ndisPct = (c.ndis / maxVal) * 100;
+      const color = c.profit ? 'var(--green)' : 'var(--red)';
+      const diff = c.profit ? `+$${c.ndis - c.cost}/hr` : `-$${c.cost - c.ndis}/hr`;
+      const bg = c.profit ? 'rgba(5,150,105,0.08)' : 'rgba(220,38,38,0.08)';
+      return `<div style="display:flex;flex-direction:column;gap:3px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div style="font-size:10.5px;font-weight:600;color:var(--text);">${c.name}</div>
+          <div style="font-size:10px;font-weight:700;color:${color};background:${bg};padding:1px 8px;border-radius:100px;">${diff}</div>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <div style="font-size:9px;color:var(--muted);width:46px;text-align:right;flex-shrink:0;">Labour</div>
+          <div style="flex:1;height:9px;background:var(--s2);border-radius:100px;overflow:hidden;">
+            <div style="height:100%;width:${costPct}%;background:rgba(220,38,38,0.45);border-radius:100px;"></div>
+          </div>
+          <div style="font-size:9px;color:var(--muted);width:30px;flex-shrink:0;">$${c.cost}</div>
+        </div>
+        <div style="display:flex;gap:4px;align-items:center;">
+          <div style="font-size:9px;color:var(--muted);width:46px;text-align:right;flex-shrink:0;">NDIS rate</div>
+          <div style="flex:1;height:9px;background:var(--s2);border-radius:100px;overflow:hidden;">
+            <div style="height:100%;width:${ndisPct}%;background:${color};opacity:0.55;border-radius:100px;"></div>
+          </div>
+          <div style="font-size:9px;color:var(--muted);width:30px;flex-shrink:0;">$${c.ndis}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Override goTo to trigger visuals on arrival
+  const _baseGoTo = goTo;
+  goTo = function(n) {
+    _baseGoTo(n);
+    if (n === 9) setTimeout(buildErrorBars, 100);
+    if (n === 11) setTimeout(buildDashboard, 100);
+  };
+</script>
+</body>
+</html>
