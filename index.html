@@ -176,7 +176,7 @@
   /* news link chip */
   .news-chip {
     display:inline-flex;align-items:center;gap:5px;
-    font-size:9.5px;font-weight:600;letter-spacing:0.04em;
+    font-size:9.5px;font-weight:400;letter-spacing:0.04em;
     padding:3px 9px;border-radius:100px;
     background:rgba(165,105,255,0.08);color:var(--purple);
     border:1px solid rgba(165,105,255,0.2);
@@ -335,18 +335,18 @@
   .fb{font-size:11.5px;color:var(--muted);line-height:1.55;flex:1;}
 
   /* ──── SLIDE 16 CTA ──── */
-  #s18 {
+  #s19 {
     background:var(--purple-d);
     color:white;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;
   }
-  #s18::before {
+  #s19::before {
     content:'';position:absolute;inset:0;pointer-events:none;
     background:
       radial-gradient(ellipse 70% 60% at 50% 40%,rgba(165,105,255,0.22) 0%,transparent 70%),
       radial-gradient(ellipse 40% 35% at 85% 85%,rgba(81,117,209,0.15) 0%,transparent 60%),
       radial-gradient(ellipse 30% 25% at 10% 75%,rgba(36,47,101,0.2) 0%,transparent 50%);
   }
-  #s18::after {
+  #s19::after {
     content:'';position:absolute;inset:0;pointer-events:none;
     background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
     background-size:60px 60px;
@@ -354,17 +354,17 @@
   #s17 .c{position:relative;z-index:2;max-width:680px;}
   #s17 h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,4vw,56px);font-weight:800;margin-bottom:14px;color:white;line-height:1.05;}
 
-    #s17 {
+    #s18 {
     background:var(--purple-d);
     color:white;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;
   }
-  #s17::before {
+  #s18::before {
     content:'';position:absolute;inset:0;pointer-events:none;
     background:
       radial-gradient(ellipse 65% 55% at 50% 50%,rgba(165,105,255,0.22) 0%,transparent 70%),
       radial-gradient(ellipse 35% 30% at 15% 80%,rgba(81,117,209,0.15) 0%,transparent 50%);
   }
-  #s17::after {
+  #s18::after {
     content:'';position:absolute;inset:0;pointer-events:none;
     background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
     background-size:60px 60px;
@@ -452,7 +452,7 @@
   <div class="toggle-track" id="tTrack"><div class="toggle-thumb"></div></div>
 </button>
 
-<div class="progress-bar"><div class="progress-fill" id="pFill" style="width:3.85%"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="pFill" style="width:3.70%"></div></div>
 
 <div class="tab-bar" id="tabBar">
   <div class="tab-logo">
@@ -471,29 +471,31 @@
   <div class="tab active" data-s="1" onclick="goTo(1)"><div class="tab-num">1</div>Title</div>
     <div class="tab" data-s="2" onclick="goTo(2)"><div class="tab-num">2</div>Meet Team</div>
   <div class="tab" data-s="3" onclick="goTo(3)"><div class="tab-num">3</div>Agenda</div>
-  <div class="tab" data-s="4" onclick="goTo(4)"><div class="tab-num">4</div>Three Truths</div>
-  <div class="tab" data-s="5" onclick="goTo(5)"><div class="tab-num">5</div>Landscape</div>
-  <div class="tab" data-s="6" onclick="goTo(6)"><div class="tab-num">6</div>Real Cost</div>
-  <div class="tab" data-s="7" onclick="goTo(7)"><div class="tab-num">7</div>Time</div>
-  <div class="tab" data-s="8" onclick="goTo(8)"><div class="tab-num">8</div>ROI Calc</div>
-  <div class="tab" data-s="9" onclick="goTo(9)"><div class="tab-num">9</div>SCHADS</div>
-  <div class="tab" data-s="10" onclick="goTo(10)"><div class="tab-num">10</div>Errors</div>
-  <div class="tab" data-s="11" onclick="goTo(11)"><div class="tab-num">11</div>Compliance</div>
-  <div class="tab" data-s="12" onclick="goTo(12)"><div class="tab-num">12</div>Profitability</div>
-  <div class="tab" data-s="13" onclick="goTo(13)"><div class="tab-num">13</div>Integration</div>
-  <div class="tab" data-s="14" onclick="goTo(14)"><div class="tab-num">14</div>Accounting</div>
-  <div class="tab" data-s="15" onclick="goTo(15)"><div class="tab-num">15</div>Pricing</div>
-  <div class="tab" data-s="16" onclick="goTo(16)"><div class="tab-num">16</div>Full Picture</div>
-  <div class="tab" data-s="17" onclick="goTo(17)"><div class="tab-num">17</div>Q&amp;A</div>
-  <div class="tab" data-s="18" onclick="goTo(18)"><div class="tab-num">18</div>
-  <div class="tab" data-s="19" onclick="goTo(19)"><div class="tab-num">19</div>HF Intro</div>
-  <div class="tab" data-s="20" onclick="goTo(20)"><div class="tab-num">20</div>The Problem</div>
-  <div class="tab" data-s="21" onclick="goTo(21)"><div class="tab-num">21</div>The Offer</div>
-  <div class="tab" data-s="22" onclick="goTo(22)"><div class="tab-num">22</div>How It Works</div>
-  <div class="tab" data-s="23" onclick="goTo(23)"><div class="tab-num">23</div>Sequal Case</div>
-  <div class="tab" data-s="24" onclick="goTo(24)"><div class="tab-num">24</div>Sydney Results</div>
-  <div class="tab" data-s="25" onclick="goTo(25)"><div class="tab-num">25</div>Who It's For</div>
-  <div class="tab" data-s="26" onclick="goTo(26)"><div class="tab-num">26</div>Get In Touch</div>Next Steps</div>
+  <div class="tab" data-s="4" onclick="goTo(4)"><div class="tab-num">4</div>Quiz</div>
+  <div class="tab" data-s="5" onclick="goTo(5)"><div class="tab-num">5</div>Three Truths</div>
+  <div class="tab" data-s="6" onclick="goTo(6)"><div class="tab-num">6</div>Landscape</div>
+  <div class="tab" data-s="7" onclick="goTo(7)"><div class="tab-num">7</div>Real Cost</div>
+  <div class="tab" data-s="8" onclick="goTo(8)"><div class="tab-num">8</div>Time</div>
+  <div class="tab" data-s="9" onclick="goTo(9)"><div class="tab-num">9</div>ROI Calc</div>
+  <div class="tab" data-s="10" onclick="goTo(10)"><div class="tab-num">10</div>SCHADS</div>
+  <div class="tab" data-s="11" onclick="goTo(11)"><div class="tab-num">11</div>Poll 2</div>
+  <div class="tab" data-s="12" onclick="goTo(12)"><div class="tab-num">11</div>Errors</div>
+  <div class="tab" data-s="13" onclick="goTo(13)"><div class="tab-num">12</div>Compliance</div>
+  <div class="tab" data-s="14" onclick="goTo(14)"><div class="tab-num">13</div>Profitability</div>
+  <div class="tab" data-s="15" onclick="goTo(15)"><div class="tab-num">14</div>Integration</div>
+  <div class="tab" data-s="16" onclick="goTo(16)"><div class="tab-num">15</div>Accounting</div>
+  <div class="tab" data-s="17" onclick="goTo(17)"><div class="tab-num">16</div>Pricing</div>
+  <div class="tab" data-s="18" onclick="goTo(18)"><div class="tab-num">17</div>Full Picture</div>
+  <div class="tab" data-s="19" onclick="goTo(19)"><div class="tab-num">18</div>Q&amp;A</div>
+  <div class="tab" data-s="20" onclick="goTo(20)"><div class="tab-num">19</div>
+  <div class="tab" data-s="21" onclick="goTo(21)"><div class="tab-num">20</div>HF Intro</div>
+  <div class="tab" data-s="22" onclick="goTo(22)"><div class="tab-num">21</div>The Problem</div>
+  <div class="tab" data-s="23" onclick="goTo(23)"><div class="tab-num">22</div>The Offer</div>
+  <div class="tab" data-s="24" onclick="goTo(24)"><div class="tab-num">23</div>How It Works</div>
+  <div class="tab" data-s="25" onclick="goTo(25)"><div class="tab-num">24</div>Sequal Case</div>
+  <div class="tab" data-s="26" onclick="goTo(26)"><div class="tab-num">25</div>Sydney Results</div>
+  <div class="tab" data-s="27" onclick="goTo(27)"><div class="tab-num">26</div>Who It's For</div>
+  <div class="tab" data-s="28" onclick="goTo(28)"><div class="tab-num">27</div>Get In Touch</div>Next Steps</div>
 </div>
 
 <div class="slides-wrap">
@@ -669,8 +671,32 @@
   </div>
 </div>
 
+<!-- S4 QUIZ -->
+<div class="slide" id="s4" style="justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;">
+
+  <!-- Subtle background decoration -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(165,105,255,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:1;max-width:640px;width:100%;">
+
+    <!-- Icon -->
+    <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(165,105,255,0.1);border:1.5px solid rgba(165,105,255,0.3);margin-bottom:20px;">
+      <span style="font-size:26px;">🗳️</span>
+    </div>
+
+    <!-- Label -->
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">Live Poll</div>
+
+    <!-- Heading -->
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:800;line-height:1.15;margin-bottom:16px;color:var(--text);">Let's benchmark <span style="color:var(--purple);">the room.</span></div>
+
+    <div style="font-size:11.5px;color:var(--muted);font-style:italic;">Questions will pop up in your chat / poll tool — answers stay anonymous.</div>
+
+  </div>
+</div>
+
 <!-- S3 THREE TRUTHS -->
-<div class="slide" id="s4">
+<div class="slide" id="s5">
   <div class="eyebrow">The Framework</div>
   <div class="h1">Three truths every <span>NDIS provider</span> needs to own.</div>
   <div class="sub">Everything we cover today connects back to one of these. By the end, you'll see exactly where ShiftCare and Employment Hero fit.</div>
@@ -734,7 +760,7 @@
 </div>
 
 <!-- S4 LANDSCAPE -->
-<div class="slide" id="s5">
+<div class="slide" id="s6">
   <div class="eyebrow">Context</div>
   <div class="h1">The Landscape Has Changed — <span>Dramatically</span></div>
   <div class="sub">2025 brought three simultaneous shifts that changed the stakes for every NDIS provider in Australia.</div>
@@ -763,7 +789,7 @@
 </div>
 
 <!-- S5 REAL COST -->
-<div class="slide" id="s6">
+<div class="slide" id="s7">
   <div class="eyebrow">Framework</div>
   <div class="h1">The Real Cost of Payroll</div>
   <div class="sub">Most providers see one cost. There are five. We'll put a dollar figure on each today.</div>
@@ -829,7 +855,7 @@
 </div>
 
 <!-- S6 TIME -->
-<div class="slide" id="s7">
+<div class="slide" id="s8">
   <div class="eyebrow">Pillar 1 · Labour Cost</div>
   <div class="h1">Time — <span>The Most Visible Cost</span></div>
   <div class="sub">The same fortnightly job. Two completely different realities.</div>
@@ -958,7 +984,7 @@
 </div>
 
 <!-- S7 ROI CALC -->
-<div class="slide" id="s8" style="overflow-y:auto;padding:0;">
+<div class="slide" id="s9" style="overflow-y:auto;padding:0;">
 <style>
 
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
@@ -2121,7 +2147,7 @@
 </div>
 
 <!-- S8 SCHADS -->
-<div class="slide" id="s9">
+<div class="slide" id="s10">
   <div class="eyebrow">Pillar 2 · Labour Cost</div>
   <div class="h1">SCHADS — <span>The Most Complex Award in Australia</span></div>
   <div class="sub">Someone in your business is carrying all of this manually. EH carries it instead.</div>
@@ -2206,8 +2232,32 @@
   </div>
 </div>
 
+<!-- S10b LIVE POLL 2 -->
+<div class="slide" id="s11" style="justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;">
+
+  <!-- Subtle background decoration -->
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(165,105,255,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:1;max-width:680px;width:100%;">
+
+    <!-- Icon -->
+    <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(165,105,255,0.1);border:1.5px solid rgba(165,105,255,0.3);margin-bottom:20px;">
+      <span style="font-size:26px;">🗳️</span>
+    </div>
+
+    <!-- Label -->
+    <div style="font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple);margin-bottom:12px;">Live Poll</div>
+
+    <!-- Heading -->
+    <div style="font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(22px,3vw,36px);font-weight:800;line-height:1.15;margin-bottom:16px;color:var(--text);">Let's pressure-test <span style="color:var(--purple);">the room.</span></div>
+
+    <div style="font-size:11.5px;color:var(--muted);font-style:italic;">Questions will pop up in your chat / poll tool — answers stay anonymous.</div>
+
+  </div>
+</div>
+
 <!-- S9 ERRORS -->
-<div class="slide" id="s10">
+<div class="slide" id="s12">
   <div class="eyebrow">Pillar 3 · Labour Cost</div>
   <div class="h1">Errors — <span>Silent, Compounding, Both Ways</span></div>
   <div class="sub">One small mistake. Repeated across 50 staff. For 18 months. Here's what that actually costs.</div>
@@ -2258,20 +2308,12 @@
         <div style="font-size:12px;font-weight:700;margin-bottom:6px;">⬆️ Overpayments — silent margin erosion</div>
         <div class="body">Incorrect classifications and unnecessary allowances drain margin every fortnight — without a line item on your P&amp;L. Most providers never find these until an audit.</div>
       </div>
-      <div class="case-block">
-        <div class="case-icon">⚖️</div>
-        <div>
-          <div class="case-title">Sushi Bay v FWO [2024] FCA 869</div>
-          <div class="case-body">$650K underpayment. $13.7M in civil penalties. Penalties apply per contravention — not per total shortfall.</div>
-          <a class="news-chip" style="margin-top:4px;" href="https://www.astrislaw.com/article/fair-work-underpayments-and-penalties" target="_blank">Read penalty breakdown</a>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
 <!-- S10 COMPLIANCE -->
-<div class="slide" id="s11">
+<div class="slide" id="s13">
   <div class="eyebrow">Pillar 4 · Compliance Risk</div>
   <div class="h1">What Happens When Something Goes Wrong</div>
   <div class="sub">Manual SCHADS payroll isn't just inefficient — it's a risk ladder. Every rung is a real consequence FWO providers have faced.</div>
@@ -2306,8 +2348,8 @@
         <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(220,38,38,0.1);border:2px solid rgba(220,38,38,0.4);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">⚖️</div>
         <div style="flex:1;padding:10px 14px;background:rgba(220,38,38,0.05);border:1px solid rgba(220,38,38,0.18);border-radius:10px;">
           <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;">Stage 3 — Civil penalty proceedings</div>
-          <div style="font-size:11px;color:var(--muted);">Penalties up to <strong style="color:var(--text);">3× the underpayment</strong> — or $7.8M per offence for a company. Sushi Bay: $650K shortfall → $13.7M penalty.</div>
-          <a class="news-chip red" style="margin-top:5px;" href="https://www.astrislaw.com/article/fair-work-underpayments-and-penalties" target="_blank">Astris Law — Penalty Breakdown</a>
+          <div style="font-size:11px;color:var(--muted);">For unintentional underpayments. Maximum penalty: up to $4,950,000 or 3× the underpayment — whichever is greater.</div>
+
         </div>
       </div>
 
@@ -2316,8 +2358,8 @@
         <div style="flex-shrink:0;width:42px;height:42px;border-radius:50%;background:rgba(220,38,38,0.15);border:2px solid var(--red);display:flex;align-items:center;justify-content:center;font-size:15px;z-index:1;">🚨</div>
         <div style="flex:1;padding:10px 14px;background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.3);border-radius:10px;">
           <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:3px;">Stage 4 — Criminal prosecution (from Jan 2025)</div>
-          <div style="font-size:11px;color:var(--muted);">Intentional or reckless underpayment = criminal offence. Up to <strong style="color:var(--text);">10 years imprisonment</strong> for individuals. Directors personally liable under s550.</div>
-          <a class="news-chip red" style="margin-top:5px;" href="https://www.kwm.com/au/en/insights/latest-thinking/wage-theft-laws-are-now-in-force-the-fwo-releases-guidance-on-how-to-comply-and-updates-its-enforcement-approach.html" target="_blank">KWM — Criminal Wage Theft Guide</a>
+          <div style="font-size:11px;color:var(--muted);">Intentional or reckless underpayment = criminal offence. Up to 10 years imprisonment for individuals. Directors personally liable under s550.</div>
+
         </div>
       </div>
     </div>
@@ -2346,13 +2388,12 @@
         <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:5px;">Employment Hero helps keep you off this ladder</div>
         <div style="font-size:11.5px;color:var(--muted);line-height:1.55;">Award interpretation is built in and auto-updates. Classifications are validated. Every entitlement is calculated correctly — before it ever reaches an employee's payslip.</div>
       </div>
-      <a class="news-chip gold" href="https://www.abilitynews.org/p/fair-work-probes-disability-sector-bbdc109b0a08c4fc" target="_blank">Ability News — FWO Sector Inquiry</a>
     </div>
   </div>
 </div>
 
 <!-- S11 PROFITABILITY -->
-<div class="slide" id="s12">
+<div class="slide" id="s14">
   <div class="eyebrow">Pillar 5 · Visibility</div>
   <div class="h1">Profitability Intelligence — <span>Know Your True Cost of Care</span></div>
   <div class="sub">Stop managing your business from a single P&amp;L line. Start seeing what's actually happening.</div>
@@ -2398,7 +2439,7 @@
 </div>
 
 <!-- S12 INTEGRATION -->
-<div class="slide" id="s13" style="background:linear-gradient(180deg,var(--sc-periwinkle) 0%,var(--bg) 35%);">
+<div class="slide" id="s15" style="background:linear-gradient(180deg,var(--sc-periwinkle) 0%,var(--bg) 35%);">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(213,223,245,0.4) 0%,transparent 40%);pointer-events:none;z-index:0;border-radius:0;"></div>
   <div class="eyebrow" style="position:relative;z-index:1;">The ShiftCare Integration</div>
   <div class="h1" style="position:relative;z-index:1;">One setup. <span>Fully automated, every fortnight.</span></div>
@@ -2528,7 +2569,7 @@
 </div>
 
 <!-- S13 XERO OBJECTION -->
-<div class="slide" id="s14">
+<div class="slide" id="s16">
   <div class="eyebrow">Common Objection</div>
   <div class="h1">"But we're already <span>paying for payroll…"</span></div>
   <div class="sub">Your accounting software has a payroll component. But generic payroll ≠ NDIS payroll. Here's what's actually different.</div>
@@ -2626,7 +2667,7 @@
 </div>
 
 <!-- S14 PRICING -->
-<div class="slide" id="s15">
+<div class="slide" id="s17">
   <div class="eyebrow">Pricing &amp; Compatibility</div>
   <div class="h1">Simple pricing. <span>Immediate ROI.</span></div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;flex:1;">
@@ -2725,7 +2766,7 @@
 </div>
 
 <!-- S15 FULL PICTURE -->
-<div class="slide" id="s16">
+<div class="slide" id="s18">
   <div class="eyebrow">The Full Picture</div>
   <div class="h1">Cost. Risk. Visibility. <span>Here's how it stacks up.</span></div>
 
@@ -2846,7 +2887,7 @@
 </div>
 
 <!-- S16 QA -->
-<div class="slide" id="s17">
+<div class="slide" id="s19">
   <div class="c">
     <div style="display:inline-flex;align-items:center;gap:10px;font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:20px;"><span style="display:inline-block;width:22px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.5),rgba(255,255,255,0.15));border-radius:2px;flex-shrink:0;"></span>Live Session</div>
     <h2 style="font-size:clamp(48px,7vw,88px);letter-spacing:-0.02em;margin-bottom:16px;">Q&amp;A</h2>
@@ -2860,7 +2901,7 @@
   </div>
 </div>
 <!-- S17 THANK YOU -->
-<div class="slide" id="s18">
+<div class="slide" id="s20">
   <div class="c">
     <!-- Thank you mark -->
     <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:rgba(186,252,88,0.15);border:1.5px solid rgba(186,252,88,0.4);margin-bottom:24px;">
@@ -2898,14 +2939,11 @@
 
 
 <!-- S19 HERO FOUNDATION INTRO -->
-<div class="slide" id="s19" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;justify-content:center;align-items:center;text-align:center;">
+<div class="slide" id="s21" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;justify-content:center;align-items:center;text-align:center;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 40%,rgba(165,105,255,0.28) 0%,transparent 70%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(81,117,209,0.15) 0%,transparent 50%);pointer-events:none;"></div>
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
   <div style="position:relative;z-index:2;max-width:680px;">
-    <div style="display:inline-flex;align-items:center;gap:10px;font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:20px;">
-      <span style="display:inline-block;width:22px;height:2px;background:linear-gradient(90deg,rgba(255,255,255,0.5),rgba(255,255,255,0.1));border-radius:2px;"></span>
-      An additional benefit of being part of the Employment Hero network
-    </div>
+
     <div style="display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:rgba(186,252,88,0.12);border:1.5px solid rgba(186,252,88,0.35);margin-bottom:22px;">
       <span style="font-size:30px;">🌱</span>
     </div>
@@ -2920,7 +2958,7 @@
 </div>
 
 <!-- S20 THE PROBLEM -->
-<div class="slide" id="s20">
+<div class="slide" id="s22">
   <div class="eyebrow">The Problem</div>
   <div class="h1">Hiring in care is <span>broken.</span></div>
   <div class="sub">Every provider on this call knows what this feels like. Here's what it actually costs you.</div>
@@ -2966,7 +3004,7 @@
 </div>
 
 <!-- S21 THE OFFER -->
-<div class="slide" id="s21" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;">
+<div class="slide" id="s23" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 35%,rgba(165,105,255,0.22) 0%,transparent 70%),radial-gradient(ellipse 35% 30% at 15% 80%,rgba(81,117,209,0.15) 0%,transparent 50%);pointer-events:none;"></div>
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
   <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%;">
@@ -3006,7 +3044,7 @@
 </div>
 
 <!-- S22 HOW IT WORKS -->
-<div class="slide" id="s22">
+<div class="slide" id="s24">
   <div class="eyebrow">How It Works</div>
   <div class="h1">Simple. Structured. <span>Effective.</span></div>
   <div class="sub">Three steps from programme partner to your team — with the Foundation doing the heavy lifting in between.</div>
@@ -3064,7 +3102,7 @@
 </div>
 
 <!-- S23 SEQUAL CASE STUDY -->
-<div class="slide" id="s23">
+<div class="slide" id="s25">
   <div class="eyebrow">Case Study · NDIS Provider, Northern Brisbane</div>
   <div class="h1">Sequal — from <span>CV mountain</span> to shortlisted hires.</div>
   <div style="flex:1;display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:stretch;min-height:0;">
@@ -3120,7 +3158,7 @@
 </div>
 
 <!-- S24 SYDNEY COHORT RESULTS -->
-<div class="slide" id="s24">
+<div class="slide" id="s26">
   <div class="eyebrow">Recent Results · Greater Sydney</div>
   <div class="h1">Four placements. <span>Zero agency fees.</span> Real outcomes.</div>
   <div class="sub">From the most recent Sydney cohort — four organisations who took a chance on a different kind of candidate pipeline.</div>
@@ -3175,7 +3213,7 @@
 </div>
 
 <!-- S25 WHO IT'S FOR -->
-<div class="slide" id="s25">
+<div class="slide" id="s27">
   <div class="eyebrow">Eligibility</div>
   <div class="h1">This is for <span>every care sector employer.</span></div>
   <div class="sub">You don't need to be an Employment Hero customer to access the Foundation. You just need to be hiring.</div>
@@ -3213,7 +3251,7 @@
 </div>
 
 <!-- S26 GET IN TOUCH -->
-<div class="slide" id="s26" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;justify-content:center;align-items:center;text-align:center;">
+<div class="slide" id="s28" style="background:var(--purple-d);color:white;position:relative;overflow:hidden;justify-content:center;align-items:center;text-align:center;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 55% at 50% 40%,rgba(165,105,255,0.25) 0%,transparent 70%),radial-gradient(ellipse 40% 35% at 85% 85%,rgba(81,117,209,0.15) 0%,transparent 50%);pointer-events:none;"></div>
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;"></div>
   <div style="position:relative;z-index:2;max-width:600px;width:100%;">
@@ -3246,7 +3284,7 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const N=26; let cur=1;
+  const N=28; let cur=1;
   function goTo(n){
     if(n<1||n>N)return;
     document.getElementById('s'+cur).classList.remove('active');
@@ -3330,8 +3368,8 @@
   const _baseGoTo = goTo;
   goTo = function(n) {
     _baseGoTo(n);
-    if (n === 10) setTimeout(buildErrorBars, 100);
-    if (n === 12) setTimeout(buildDashboard, 100);
+    if (n === 12) setTimeout(buildErrorBars, 100);
+    if (n === 14) setTimeout(buildDashboard, 100);
   };
 </script>
 </body>
